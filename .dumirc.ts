@@ -10,5 +10,8 @@ export default defineConfig({
   theme: {
     '@theme-color': '#1997CC'
   },
-  styles: ['body{font-size:14px}']
+  styles: ['body{font-size:14px}'],
+  links:[
+    {href:'/logo.png',rel:'shortcut icon'}
+  ]
 });
