@@ -36,7 +36,7 @@ const dataSource = [
   {name:'junny',age:23,sex:'女'}
 ]
 
-export default () => <Table columns={columns} dataSource={dataSource} />
+export default () => <Table rowKey='name' columns={columns} dataSource={dataSource} />
 ```
 
 ### 边框
@@ -66,4 +66,37 @@ const dataSource = [
 ]
 
 export default () => <Table bordered columns={columns} dataSource={dataSource} />
+```
+
+## 纵向表格
+
+```jsx
+import React from 'react';
+import {Table} from '@change/hzpdf';
+
+
+const columns = [
+  {
+    title:'姓名',
+    dataIndex:'name'
+  },
+   {
+    title:'年龄',
+    dataIndex:'age',
+  },
+   {
+    title:'姓别',
+    dataIndex:'sex'
+  }
+]
+
+const dataSource = [
+  {name:'change',age:26,sex:'男'},
+  {name:'junny',age:23,sex:'女'}
+]
+
+
+export default () => <Table.Column bordered columns={columns} dataSource={[]} />
+
+
 ```
