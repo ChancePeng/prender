@@ -1,0 +1,30 @@
+@prefixCls: hz-table;
+@borderColor: #efefef;
+
+.@{prefixCls} {
+  table {
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  &-cell {
+    padding: 8px 16px;
+    text-align: left;
+  }
+
+  &-thead {
+    background: #fafafa;
+  }
+
+  th {
+    font-weight: 600;
+  }
+
+  &-bordered {
+    border: 1px solid @borderColor;
+
+    .@{prefixCls}-cell {
+      border: @borderColor 1px solid;
+    }
+  }
+}

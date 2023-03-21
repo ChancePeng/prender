@@ -1,0 +1,14 @@
+import { defineConfig } from 'dumi';
+
+export default defineConfig({
+  outputPath: 'docs-dist',
+  themeConfig: {
+    name: 'hzpdf',
+    logo: '/logo.png',
+    footer: 'power by change',
+  },
+  theme: {
+    '@theme-color': '#1997CC'
+  },
+  styles: ['body{font-size:14px}']
+});
