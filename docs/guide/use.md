@@ -5,3 +5,11 @@ nav:
 group:
   title: 快速开始
 ---
+
+```jsx
+
+export default () => {
+  return <h1>hello</h1>
+}
+
+```

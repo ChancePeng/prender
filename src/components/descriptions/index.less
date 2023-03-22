@@ -1,0 +1,35 @@
+@prefixCls: hz-descriptions;
+
+.@{prefixCls} {
+  table {
+    border-spacing: 0;
+    width: 100%;
+    border-collapse: collapse;
+
+  }
+
+  &-cell {
+    &-wrapper{
+      display: flex;
+      .@{prefixCls}-cell-label{
+        display: flex;
+        &::after{
+          content:':';
+          margin: 0 8px 0 2px;
+        }
+      }
+    }
+
+  }
+
+  &-bordered{
+    .@{prefixCls}-cell{
+      padding: 8px 16px;
+      border: 1px solid #f0f0f0;
+      &-label{
+        background: #fafafa;
+        font-weight: 400;
+      }
+    }
+  }
+}
