@@ -2,12 +2,12 @@ import classnames from 'classnames';
 import React from 'react';
 import { chunk, get } from 'lodash'
 import type { DescriptionsProps } from './type';
-import type { FC } from 'react';
+import type { PFC } from '../type';
 import { ColumnType } from '../table/type';
 
 import './index.less';
 
-const Descriptions: FC<DescriptionsProps> = (props) => {
+const Descriptions: PFC<DescriptionsProps> = (props) => {
   const { column = 3, dataSource, columns, style, className, bordered } = props;
   const prefixCls = 'hz-descriptions';
   const classes = classnames(prefixCls, {

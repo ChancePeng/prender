@@ -2,11 +2,11 @@ import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 import { get } from 'lodash'
 import type { TableProps } from './type'
-import type { FC } from 'react';
+import type { PFC } from '../type';
 
 import './index.less';
 
-const Table: FC<TableProps> = (props) => {
+const Table: PFC<TableProps> = (props) => {
   const prefixCls = 'hz-table';
   const {
     dataSource,
@@ -81,7 +81,7 @@ const Table: FC<TableProps> = (props) => {
           {renderTableBody()}
         </tbody>
       </table>
-      {footer && <div className={`${prefixCls}-header`}>{footer}</div>}
+      {footer && <div className={`${prefixCls}-footer`}>{footer}</div>}
     </div>
   )
 }

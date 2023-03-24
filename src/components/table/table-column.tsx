@@ -5,12 +5,12 @@ import { get } from 'lodash';
 import './index.less'
 
 
-import type { FC } from 'react';
+import type { PFC } from '../type';
 import { TableProps } from './type';
 
 import type { ColumnType } from './type'
 
-const TableColumn: FC<TableProps> = (props) => {
+const TableColumn: PFC<TableProps> = (props) => {
   const { className, columns, bordered, dataSource, style, renderEmpty } = props;
   const prefixCls = 'hz-table';
 

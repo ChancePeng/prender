@@ -9,12 +9,6 @@ export interface ColumnType<T> {
 
 
 export interface TableProps<T = Record<string, any>> {
-  readonly dataSource?: T[],
-  bordered?: boolean,
   columns?: ColumnType<T>[],
-  className?: string,
-  style?: CSSProperties,
-  header?: ReactNode,
-  footer?: ReactNode,
   renderEmpty?: () => ReactNode,
 }
