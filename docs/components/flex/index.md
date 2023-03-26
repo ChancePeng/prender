@@ -4,6 +4,12 @@ group:
   title: 布局
 ---
 
+## Flex布局
+
+flex盒模型
+
+## 基本使用
+
 ```jsx
 import {Flex,Table,Descriptions} from '@change/hzpdf';
 

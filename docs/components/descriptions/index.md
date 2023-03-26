@@ -6,7 +6,9 @@ group:
 
 ## 描述列表
 
-### 基本使用
+展示描述信息
+
+## 基本使用
 
 ```jsx
 import React from 'react'
@@ -29,7 +31,7 @@ export default () => {
 }
 ```
 
-### 带边框
+## 带边框
 
 ```jsx
 import React from 'react'

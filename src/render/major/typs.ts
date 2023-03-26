@@ -1,6 +1,6 @@
 import type { ColumnType } from '@/components';
 import type { ReactNode, CSSProperties } from 'react';
-import { IMiddleware, MiddlewareType } from '../middleware/type';
+import { MiddlewareType } from '../middleware/type';
 import type { ComponentType } from '../type';
 
 interface FieldProps {
@@ -15,15 +15,9 @@ export type VisibleType = boolean
   | (() => boolean)
 
 
-interface ICount {
-  current: number,
-  origin: Record<string, number>,
-  index: number,
-}
-
 export interface IConfig {
-  type: ComponentType,
-  instanceOf: ComponentType,
+  readonly type: ComponentType,
+  readonly instanceOf: ComponentType,
   dataIndex?: string | string[],
   columns?: ColumnType<unknown>[],
   dataSource?: any,
@@ -39,7 +33,6 @@ export interface IConfig {
   renderEmpty?: (record: any) => ReactNode,
   render?: (data: any, record: any, dom: ReactNode) => ReactNode,
 }
-
 
 
 export interface Options {

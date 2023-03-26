@@ -1,11 +1,12 @@
 import { CountMiddleware } from './preinstall';
 
-export { default as initMiddlewares } from './init';
 
 const MiddlewarePreInstall = {
   CountMiddleware
 }
 
+
+export { default as initMiddlewares } from './init';
 export {
   MiddlewarePreInstall
 }
