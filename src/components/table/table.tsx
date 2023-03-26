@@ -14,8 +14,6 @@ const Table: PFC<TableProps> = (props) => {
     className,
     columns,
     style,
-    header,
-    footer,
     renderEmpty,
   } = props;
 
@@ -70,7 +68,6 @@ const Table: PFC<TableProps> = (props) => {
 
   return (
     <div className={classes} style={style}>
-      {header && <div className={`${prefixCls}-header`}>{header}</div>}
       <table>
         <thead className={`${prefixCls}-thead`}>
           <tr className={`${prefixCls}-row`}>
@@ -81,7 +78,6 @@ const Table: PFC<TableProps> = (props) => {
           {renderTableBody()}
         </tbody>
       </table>
-      {footer && <div className={`${prefixCls}-footer`}>{footer}</div>}
     </div>
   )
 }

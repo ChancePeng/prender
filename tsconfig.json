@@ -9,7 +9,8 @@
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "hzpdf": ["src"],
-      "hzpdf/*": ["src/*", "*"]
+      "hzpdf/*": ["src/*", "*"],
+      "@/*":["src/*"]
     }
   },
   "include": [".dumi/**/*", ".dumirc.ts", "src/**/*"]

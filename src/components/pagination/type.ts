@@ -1,5 +1,6 @@
-import type { IConfig } from '../../render/typs';
-import type { CSSProperties } from 'react'
+
+import type { CSSProperties } from 'react';
+import type { IConfig, CountOption } from '@/render'
 
 export interface PaginationProps {
   config?: IConfig[],
@@ -7,5 +8,6 @@ export interface PaginationProps {
   water?: string,
   style?: CSSProperties,
   className?: string,
-  pfcs?: Record<any, any>
+  pfcs?: Record<any, any>,
+  count?: CountOption[]
 }

@@ -22,6 +22,13 @@ const data = {
 
 const config = [
   {
+    type:'Headline',
+    filedProps:{
+      tag:'h1',
+    },
+    dataSource:'这是一级标题'
+  },
+  {
     type:'Table',
     columns,
     dataSource:data,

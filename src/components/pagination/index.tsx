@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import render from '../../render';
+import render from '@/render/major';
 import * as Components from '../index'
 import type { FC } from 'react';
 import type { PaginationProps } from './type';
@@ -17,10 +17,13 @@ const Pagination: FC<PaginationProps> = (props) => {
           ...Components,
           ...pfcs,
         },
-        data
+        data,
       })}
     </div>
   )
 }
 
 export default Pagination;
+export {
+  PaginationProps,
+}
