@@ -1,7 +1,7 @@
 import type { ColumnType } from '@/components';
 import type { ReactNode, CSSProperties } from 'react';
+import { IMiddleware, MiddlewareType } from '../middleware/type';
 import type { ComponentType } from '../type';
-import type { CountOption } from '../count/type'
 
 interface FieldProps {
   className?: string,
@@ -31,6 +31,8 @@ export interface IConfig {
   visible?: VisibleType,
   fieldProps?: FieldProps,
   children?: IConfig[],
+  readonly __origin?: any,
+  readonly __data?:any,
   header?: (data?: any, record?: any) => ReactNode | ReactNode,
   footer?: (data?: any, record?: any) => ReactNode | ReactNode | string[],
   beforeDataRendered?: (data: any, record: any) => any,
@@ -38,8 +40,10 @@ export interface IConfig {
   render?: (data: any, record: any, dom: ReactNode) => ReactNode,
 }
 
+
+
 export interface Options {
   pfcs?: Record<string, any>,
   data?: Record<string, any>,
-  middleware?: any[],
+  middlewares?:MiddlewareType
 }

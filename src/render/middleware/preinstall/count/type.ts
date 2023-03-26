@@ -1,4 +1,4 @@
-import type { ComponentType } from '../type';
+import type { ComponentType } from '@/render';
 import type { PluginImplements } from './plugin/type';
 
 

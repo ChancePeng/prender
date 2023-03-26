@@ -1,13 +1,13 @@
 import React from 'react';
 import classnames from 'classnames';
-import render from '@/render/major';
+import { render } from '@/render';
 import * as Components from '../index'
 import type { FC } from 'react';
 import type { PaginationProps } from './type';
 
 
 const Pagination: FC<PaginationProps> = (props) => {
-  const { config = [], data = {}, style, className, pfcs = {} } = props;
+  const { config = [], data = {}, style, className, pfcs = {},middlewares } = props;
   const prefixCls = 'hz-pagination';
   const classes = classnames(prefixCls, className);
   return (
@@ -18,6 +18,7 @@ const Pagination: FC<PaginationProps> = (props) => {
           ...pfcs,
         },
         data,
+        middlewares
       })}
     </div>
   )

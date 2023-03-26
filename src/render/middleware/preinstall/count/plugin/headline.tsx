@@ -44,16 +44,15 @@ class HeadlinePlugin implements PluginImplements<number[]> {
     })
     this.value = newValue;
   }
-  renderHeader(props: HeadlineProps, dom: ReactNode) {
+  render(props: HeadlineProps, dom: ReactNode) {
     const { tag = 'h1' } = props;
     const tagIndex = tagIndexMap[tag];
     let title = this.value?.filter((_, index) => index <= tagIndex).join('.') || '';
     if (tag === 'h1' && this.option.language === 'chinese') {
-      title = convertToChinaNum(Number.parseInt(title))
+      title =`${convertToChinaNum(Number.parseInt(title))}、`
     }
-    return (
-      <span>{title}{dom}</span>
-    )
+    return React.createElement('span',{
+    },title,dom)
   }
 }
 

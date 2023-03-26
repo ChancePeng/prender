@@ -8,6 +8,8 @@ group:
 import React from 'react';
 import {Pagination} from '@change/hzpdf';
 
+import {MiddlewarePreInstall} from '@change/hzpdf/render'
+
 const columns = [
   {dataIndex:'name',title:'年龄'},
   {dataIndex:'age',title:'姓名'},
@@ -23,7 +25,7 @@ const data = {
 const config = [
   {
     type:'Headline',
-    filedProps:{
+    fieldProps:{
       tag:'h1',
     },
     dataSource:'这是一级标题'
@@ -35,5 +37,7 @@ const config = [
     bordered:true,
   }
 ]
-export default () => <Pagination config={config} />
+export default () => <Pagination config={config} middlewares={[
+  {use:MiddlewarePreInstall.CountMiddleware,option:['Headline']}
+]}  />
 ```

@@ -1,6 +1,6 @@
 
 import type { CSSProperties } from 'react';
-import type { IConfig, CountOption } from '@/render'
+import type { IConfig, MiddlewareType } from '@/render';
 
 export interface PaginationProps {
   config?: IConfig[],
@@ -9,5 +9,5 @@ export interface PaginationProps {
   style?: CSSProperties,
   className?: string,
   pfcs?: Record<any, any>,
-  count?: CountOption[]
+  middlewares?: MiddlewareType
 }

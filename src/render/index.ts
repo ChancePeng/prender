@@ -1,3 +1,5 @@
 export * from './major';
 
-export * from './count'
+export * from './middleware';
+
+export * from './type';
