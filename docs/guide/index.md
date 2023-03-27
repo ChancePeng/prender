@@ -7,4 +7,6 @@ group:
   title: 快速开始
 ---
 
-[PRender](/)采用 React 搭建了一套配置化生成网页的生成器，主要用于 puppeteer 快速将网页转换成 pdf
+## 简介
+
+[PRender](/) 是采用 [React](https://reactjs.org) 搭建的一套配置化生成网页的生成器，主要应用场景例如使用 [puppeteer](https://puppeteer.bootcss.com/) 快速将网页转换成 pdf

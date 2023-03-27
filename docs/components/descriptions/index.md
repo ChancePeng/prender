@@ -10,46 +10,8 @@ group:
 
 ## 基本使用
 
-```jsx
-import React from 'react';
-import { Descriptions } from '@change/prender';
-
-const columns = [
-  { dataIndex: 'name', title: '年龄' },
-  { dataIndex: 'age', title: '姓名' },
-  { dataIndex: 'sex', title: '性别' },
-];
-
-const data = {
-  age: 12,
-  name: 'c',
-  sex: '男',
-};
-
-export default () => {
-  return <Descriptions columns={columns} dataSource={data} />;
-};
-```
+<code src='./base.tsx'></code>
 
 ## 带边框
 
-```jsx
-import React from 'react';
-import { Descriptions } from '@change/prender';
-
-const columns = [
-  { dataIndex: 'name', title: '年龄' },
-  { dataIndex: 'age', title: '姓名' },
-  { dataIndex: 'sex', title: '性别' },
-];
-
-const data = {
-  age: 12,
-  name: 'c',
-  sex: '男',
-};
-
-export default () => {
-  return <Descriptions bordered columns={columns} dataSource={data} />;
-};
-```
+<code src='./border.tsx'></code>

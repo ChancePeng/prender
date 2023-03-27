@@ -10,28 +10,8 @@ group:
 
 ## 基本使用
 
-```jsx
-import { Mark } from '@change/prender';
-
-export default () => {
-  return (
-    <div>
-      <Mark dataSource="这是一些描述说明" />
-    </div>
-  );
-};
-```
+<code src='./base.tsx'></code>
 
 ## 多条文本
 
-```jsx
-import { Mark } from '@change/prender';
-
-export default () => {
-  return (
-    <div>
-      <Mark dataSource={['这是一些描述说明', '这是一些描述说明']} />
-    </div>
-  );
-};
-```
+<code src='./more.tsx'></code>
