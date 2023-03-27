@@ -4,43 +4,41 @@ group:
   title: 布局
 ---
 
-## Flex布局
+## Flex 布局
 
-flex盒模型
+flex 盒模型
 
 ## 基本使用
 
 ```jsx
-import {Flex,Table,Descriptions} from '@change/hzpdf';
+import { Flex, Table, Descriptions } from '@change/prender';
 
 export default () => {
   const columns = [
     {
-      dataIndex:'name',
-      title:'name',
+      dataIndex: 'name',
+      title: 'name',
     },
-     {
-      dataIndex:'age',
-      title:'age',
+    {
+      dataIndex: 'age',
+      title: 'age',
     },
-     {
-      dataIndex:'sex',
-      title:'sex',
-    }
-  ]
+    {
+      dataIndex: 'sex',
+      title: 'sex',
+    },
+  ];
   const data = {
-    name:'change',
-    age:20,
-    sex:'boy'
-  }
-  const dataSource = [
-    data,
-  ]
+    name: 'change',
+    age: 20,
+    sex: 'boy',
+  };
+  const dataSource = [data];
   return (
     <Flex>
-      <Table dataSource={dataSource} columns={columns} bordered/>
-      <Descriptions dataSource={data} columns={columns} bordered/>
+      <Table dataSource={dataSource} columns={columns} bordered />
+      <Descriptions dataSource={data} columns={columns} bordered />
     </Flex>
-  )
-}
+  );
+};
 ```

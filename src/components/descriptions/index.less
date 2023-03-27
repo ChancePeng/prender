@@ -1,32 +1,33 @@
-@prefixCls: hz-descriptions;
+@prefixCls: pfc-descriptions;
 
 .@{prefixCls} {
   table {
     border-spacing: 0;
     width: 100%;
     border-collapse: collapse;
-
   }
 
   &-cell {
-    &-wrapper{
+    &-wrapper {
       display: flex;
-      .@{prefixCls}-cell-label{
+
+      .@{prefixCls}-cell-label {
         display: flex;
-        &::after{
-          content:':';
+
+        &::after {
+          content: ':';
           margin: 0 8px 0 2px;
         }
       }
     }
-
   }
 
-  &-bordered{
-    .@{prefixCls}-cell{
+  &-bordered {
+    .@{prefixCls}-cell {
       padding: 8px 16px;
       border: 1px solid #f0f0f0;
-      &-label{
+
+      &-label {
         background: #fafafa;
         font-weight: 400;
       }

@@ -8,9 +8,9 @@
     "baseUrl": "./",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "hzpdf": ["src"],
-      "hzpdf/*": ["src/*", "*"],
-      "@/*":["src/*"]
+      "prender": ["src"],
+      "prender/*": ["src/*", "*"],
+      "@/*": ["src/*"]
     }
   },
   "include": [".dumi/**/*", ".dumirc.ts", "src/**/*"]

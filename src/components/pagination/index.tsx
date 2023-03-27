@@ -1,14 +1,20 @@
-import React from 'react';
-import classnames from 'classnames';
 import { render } from '@/render';
-import * as Components from '../index'
+import classnames from 'classnames';
 import type { FC } from 'react';
+import React from 'react';
+import * as Components from '../index';
 import type { PaginationProps } from './type';
 
-
 const Pagination: FC<PaginationProps> = (props) => {
-  const { config = [], data = {}, style, className, pfcs = {},middlewares } = props;
-  const prefixCls = 'hz-pagination';
+  const {
+    config = [],
+    data = {},
+    style,
+    className,
+    pfcs = {},
+    middlewares,
+  } = props;
+  const prefixCls = 'pfc-pagination';
   const classes = classnames(prefixCls, className);
   return (
     <div className={classes} style={style}>
@@ -18,13 +24,11 @@ const Pagination: FC<PaginationProps> = (props) => {
           ...pfcs,
         },
         data,
-        middlewares
+        middlewares,
       })}
     </div>
-  )
-}
+  );
+};
 
 export default Pagination;
-export {
-  PaginationProps,
-}
+export { PaginationProps };

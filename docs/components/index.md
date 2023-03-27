@@ -1,5 +1,6 @@
 ---
 title: 组件概括
-nav: 
+nav:
   title: 组件
+  order: 2
 ---
