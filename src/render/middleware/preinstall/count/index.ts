@@ -11,7 +11,10 @@ class CountMiddleware implements MiddlewareImplements {
   emit(config: IConfig) {
     const { type, instanceOf, fieldProps } = config;
     const key = type || instanceOf;
-    const plugin = this.countMap[key];
+    let plugin = null;
+    if (key) {
+      plugin = this.countMap[key];
+    }
     if (plugin) {
       const { emit } = plugin;
       const _emit = emit.bind(plugin);

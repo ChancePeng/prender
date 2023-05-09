@@ -1,6 +1,7 @@
 import { get, isEmpty } from 'lodash';
-import type { ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
+import * as PdfComponents from '../../components';
 import initMiddlewares from '../middleware/init';
 import renderFooter from './footer';
 import getShowStaus from './getShowStatus';
@@ -9,22 +10,33 @@ import type { IConfig, Options } from './typs';
 
 const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
   const { pfcs, data, middlewares = [] } = options;
+  const _pfcs: Record<string, FunctionComponent> = {
+    ...PdfComponents,
+    ...pfcs,
+  };
+  // 初始化中间件
   const middlewareInstance = initMiddlewares(middlewares);
   return (function () {
     return configs.map((config, index) => {
       let _config = config;
       const { dataSource: _dataSource, dataIndex, beforeDataRendered } = config;
+      // 获取配置的静态数据
       let origin = _dataSource;
+      // 存在dataIndex，从data中获取
+      // 多值情况
       if (dataIndex instanceof Array) {
         origin = dataIndex.map((key) => get(data, key));
       } else if (dataIndex) {
+        // 单值情况
         origin = get(data, dataIndex);
       }
 
+      // data的中间处理函数
       if (beforeDataRendered) {
         origin = beforeDataRendered(origin, data);
       }
 
+      // 执行所有中间件
       middlewareInstance?.forEach((item) => {
         const { emit, defineConfig } = item;
         if (emit) {
@@ -60,12 +72,12 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
 
       origin = dataSource;
 
-      let Component: any = pfcs?.[type];
+      let Component: any = _pfcs?.[type];
       if (!Component) {
         return <React.Fragment key={index} />;
       }
 
-      const show = getShowStaus({ visible, origin, dataIndex });
+      const show = getShowStaus({ visible, origin, dataIndex, data });
 
       if (!show) {
         return <React.Fragment key={index} />;

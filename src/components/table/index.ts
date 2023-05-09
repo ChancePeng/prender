@@ -4,7 +4,7 @@ import TableColumn from './table-column';
 type TableType = typeof TableInstance;
 
 interface TableProps extends TableType {
-  Column:typeof TableColumn
+  Column: typeof TableColumn;
 }
 
 const Table = TableInstance as TableProps;
@@ -12,3 +12,4 @@ Table.Column = TableColumn;
 
 export default Table;
 export * from './type';
+export { TableColumn };

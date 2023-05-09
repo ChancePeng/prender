@@ -2,7 +2,6 @@ import { render } from '@/render';
 import classnames from 'classnames';
 import type { FC } from 'react';
 import React from 'react';
-import * as Components from '../index';
 import type { PaginationProps } from './type';
 
 const Pagination: FC<PaginationProps> = (props) => {
@@ -19,10 +18,7 @@ const Pagination: FC<PaginationProps> = (props) => {
   return (
     <div className={classes} style={style}>
       {render(config, {
-        pfcs: {
-          ...Components,
-          ...pfcs,
-        },
+        pfcs,
         data,
         middlewares,
       })}

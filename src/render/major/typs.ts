@@ -1,5 +1,5 @@
 import type { ColumnType } from '@/components';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, FunctionComponent, ReactNode } from 'react';
 import { MiddlewareType } from '../middleware/type';
 import type { ComponentType } from '../type';
 
@@ -13,7 +13,7 @@ export type VisibleType =
   | boolean
   | 'hidden-while-empty-origin'
   | 'hidden-while-empty-dataIndex'
-  | (() => boolean);
+  | ((data?: any, record?: Record<string, any>) => boolean);
 
 export interface IConfig {
   readonly type: ComponentType;
@@ -35,7 +35,7 @@ export interface IConfig {
 }
 
 export interface Options {
-  pfcs?: Record<string, any>;
+  pfcs?: Record<string, FunctionComponent>;
   data?: Record<string, any>;
   middlewares?: MiddlewareType;
 }
