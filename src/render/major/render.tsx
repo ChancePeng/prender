@@ -83,12 +83,9 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         return <React.Fragment key={index} />;
       }
 
-      if (isEmpty(origin)) {
-        if (!renderComponent && renderEmpty) {
-          Component = renderEmpty(data);
-        } else {
-          Component = <React.Fragment key={index} />;
-        }
+      // 展示当前组件当data为空的时候
+      if (isEmpty(origin) && renderEmpty) {
+        Component = renderEmpty(data);
       }
 
       if (renderComponent) {

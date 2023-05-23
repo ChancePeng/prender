@@ -24,7 +24,7 @@ const config = [
   {
     type: 'Table',
     columns,
-    dataSource: data,
+    dataSource: [data],
     bordered: true,
   },
 ];
