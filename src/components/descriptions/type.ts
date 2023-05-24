@@ -1,9 +1,10 @@
-import { ColumnType } from '../table/type';
+import { ColumnType } from '../type';
 
-export interface IColumn<T> extends ColumnType<T> {
+export interface DescriptionsColumnType<T>
+  extends Omit<ColumnType<T>, 'width'> {
   span?: number;
 }
 export interface DescriptionsProps<T = Record<string, any>> {
   column?: number;
-  columns?: IColumn<T>[];
+  columns?: DescriptionsColumnType<T>[];
 }

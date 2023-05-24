@@ -23,7 +23,7 @@ const Table: PFC<TableProps> = (props) => {
     if (!record) {
       return columns?.map((column, index) => {
         return (
-          <td key={index} className={`${prefixCls}-cell`}>
+          <td key={index} width={column?.width} className={`${prefixCls}-cell`}>
             {column?.title}
           </td>
         );

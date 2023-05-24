@@ -7,7 +7,7 @@ import './index.less';
 import type { PFC } from '../type';
 import { TableProps } from './type';
 
-import type { ColumnType } from './type';
+import type { TableColumnType } from './type';
 
 const TableColumn: PFC<TableProps> = (props) => {
   const { className, columns, bordered, dataSource, style, renderEmpty } =
@@ -24,7 +24,7 @@ const TableColumn: PFC<TableProps> = (props) => {
   );
 
   const renderCell = (
-    column: ColumnType<Record<string, any>>,
+    column: TableColumnType<Record<string, any>>,
     index: number,
   ) => {
     const { dataIndex, render, align } = column;

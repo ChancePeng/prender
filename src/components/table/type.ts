@@ -1,14 +1,10 @@
 import type { ReactNode } from 'react';
+import { ColumnType } from '../type';
 
-export interface ColumnType<T = any> {
-  align?: 'left' | 'right' | 'center';
-  dataIndex?: string | string[];
-  title?: string;
+export interface TableColumnType<T> extends ColumnType<T> {
   width?: number | string;
-  render?: (value?: any, record?: T, index?: number) => ReactNode;
 }
-
 export interface TableProps<T = Record<string, any>> {
-  columns?: ColumnType<T>[];
+  columns?: TableColumnType<T>[];
   renderEmpty?: () => ReactNode;
 }

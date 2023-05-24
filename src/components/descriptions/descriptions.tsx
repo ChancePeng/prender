@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { get } from 'lodash';
 import React, { useMemo } from 'react';
 import type { PFC } from '../type';
-import type { DescriptionsProps, IColumn } from './type';
+import type { DescriptionsColumnType, DescriptionsProps } from './type';
 
 import './index.less';
 
@@ -20,7 +20,7 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
   const rows = useMemo(() => {
     let index = 0;
     let sum = 0;
-    const result: IColumn<any>[][] = [];
+    const result: DescriptionsColumnType<any>[][] = [];
     columns?.forEach((item) => {
       const { span = 1 } = item;
       sum = sum + span;
@@ -39,7 +39,7 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
     return result;
   }, []);
 
-  const renderCell = (column: IColumn<any>, index: number) => {
+  const renderCell = (column: DescriptionsColumnType<any>, index: number) => {
     const { dataIndex, title, render, span = 1 } = column;
     let data = null;
     if (dataIndex instanceof Array) {

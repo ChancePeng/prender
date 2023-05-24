@@ -1,4 +1,4 @@
-import type { ColumnType } from '@/components';
+import type { DescriptionsColumnType, TableColumnType } from '@/components';
 import type { CSSProperties, FunctionComponent, ReactNode } from 'react';
 import { MiddlewareType } from '../middleware/type';
 import type { ComponentType } from '../type';
@@ -8,6 +8,8 @@ interface FieldProps {
   style?: CSSProperties;
   [data: string]: any;
 }
+
+type ConfigColumnType<T = any> = TableColumnType<T> & DescriptionsColumnType<T>;
 
 export type VisibleType =
   | boolean
@@ -19,7 +21,7 @@ export interface IConfig {
   readonly type: ComponentType;
   readonly instanceOf?: ComponentType;
   dataIndex?: string | string[];
-  columns?: ColumnType[];
+  columns?: ConfigColumnType[];
   dataSource?: any;
   bordered?: boolean;
   visible?: VisibleType;
