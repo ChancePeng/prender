@@ -1,9 +1,8 @@
 import classnames from 'classnames';
-import { chunk, get } from 'lodash';
-import React from 'react';
-import { ColumnType } from '../table/type';
+import { get } from 'lodash';
+import React, { useMemo } from 'react';
 import type { PFC } from '../type';
-import type { DescriptionsProps } from './type';
+import type { DescriptionsProps, IColumn } from './type';
 
 import './index.less';
 
@@ -18,10 +17,30 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
     className,
   );
 
-  const rows = chunk(columns, column);
+  const rows = useMemo(() => {
+    let index = 0;
+    let sum = 0;
+    const result: IColumn<any>[][] = [];
+    columns?.forEach((item) => {
+      const { span = 1 } = item;
+      sum = sum + span;
+      if (sum > column) {
+        sum = 1;
+        index += 1;
+        result[index] = [item];
+      } else {
+        if (result[index]) {
+          result[index].push(item);
+        } else {
+          result[index] = [item];
+        }
+      }
+    });
+    return result;
+  }, []);
 
-  const renderCell = (column: ColumnType<any>, index: number) => {
-    const { dataIndex, title, render } = column;
+  const renderCell = (column: IColumn<any>, index: number) => {
+    const { dataIndex, title, render, span = 1 } = column;
     let data = null;
     if (dataIndex instanceof Array) {
       data = dataIndex.map((key) => get(dataSource, key));
@@ -35,14 +54,17 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
           <th className={`${prefixCls}-cell ${prefixCls}-cell-label`}>
             {title}
           </th>
-          <td className={`${prefixCls}-cell ${prefixCls}-cell-content`}>
+          <td
+            className={`${prefixCls}-cell ${prefixCls}-cell-content`}
+            colSpan={span}
+          >
             {inner}
           </td>
         </React.Fragment>
       );
     }
     return (
-      <td className={`${prefixCls}-cell`} key={index}>
+      <td className={`${prefixCls}-cell`} key={index} colSpan={span}>
         <div className={`${prefixCls}-cell-wrapper`}>
           <div className={`${prefixCls}-cell-label`}>{title}</div>
           <div className={`${prefixCls}-cell-content`}>{inner}</div>

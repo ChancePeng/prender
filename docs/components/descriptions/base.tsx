@@ -2,7 +2,7 @@ import { Descriptions } from '@change/prender';
 import React from 'react';
 
 const columns = [
-  { dataIndex: 'name', title: '年龄' },
+  { dataIndex: 'name', title: '年龄', span: 3 },
   { dataIndex: 'age', title: '姓名' },
   { dataIndex: 'sex', title: '性别' },
 ];

@@ -19,7 +19,7 @@ export interface IConfig {
   readonly type: ComponentType;
   readonly instanceOf?: ComponentType;
   dataIndex?: string | string[];
-  columns?: ColumnType<unknown>[];
+  columns?: ColumnType[];
   dataSource?: any;
   bordered?: boolean;
   visible?: VisibleType;
@@ -32,6 +32,17 @@ export interface IConfig {
   beforeDataRendered?: (data: any, record: any) => any;
   renderEmpty?: (record: any) => ReactNode;
   render?: (data: any, record: any, dom: ReactNode) => ReactNode;
+  emit?: (
+    config: IConfig,
+  ) => Omit<
+    IConfig,
+    | 'type'
+    | 'instanceOf'
+    | '__origin'
+    | '__data'
+    | 'beforeDataRendered'
+    | 'emit'
+  >;
 }
 
 export interface Options {

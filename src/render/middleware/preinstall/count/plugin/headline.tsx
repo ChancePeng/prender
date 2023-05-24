@@ -1,5 +1,5 @@
 import type { HeadlineProps, HeadlineTagType } from '@/components';
-import React, { ReactNode } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 import { convertToChinaNum } from '../tools';
 import type { PluginImplements } from './type';
 
@@ -10,15 +10,20 @@ const tagIndexMap: Record<HeadlineTagType, number> = {
   h4: 3,
 };
 
+type Tag = 'h1' | 'h2' | 'h3' | 'h4';
+
 interface Option {
-  language: 'chinese' | 'arba';
+  language?: 'chinese' | 'arba';
+  tags?: Tag[];
 }
 
 const initOption = (option?: Option) => {
-  const { language = 'chinese' } = option || {};
+  const { language = 'chinese', tags = ['h1', 'h2', 'h3', 'h4'] } =
+    option || {};
   return {
     language,
-  };
+    tags,
+  } as Option;
 };
 
 class HeadlinePlugin implements PluginImplements<number[]> {
@@ -45,12 +50,15 @@ class HeadlinePlugin implements PluginImplements<number[]> {
   render(props: HeadlineProps, dom: ReactNode) {
     const { tag = 'h1' } = props;
     const tagIndex = tagIndexMap[tag];
-    let title =
-      this.value?.filter((_, index) => index <= tagIndex).join('.') || '';
-    if (tag === 'h1' && this.option.language === 'chinese') {
-      title = `${convertToChinaNum(Number.parseInt(title))}、`;
+    if (this.option.tags?.includes(tag)) {
+      let title =
+        this.value?.filter((_, index) => index <= tagIndex).join('.') || '';
+      if (tag === 'h1' && this.option.language === 'chinese') {
+        title = `${convertToChinaNum(Number.parseInt(title))}、`;
+      }
+      return React.createElement(Fragment, {}, title, dom);
     }
-    return React.createElement('span', {}, title, dom);
+    return React.createElement(Fragment, {}, dom);
   }
 }
 

@@ -19,7 +19,12 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
   return (function () {
     return configs.map((config, index) => {
       let _config = config;
-      const { dataSource: _dataSource, dataIndex, beforeDataRendered } = config;
+      const {
+        dataSource: _dataSource,
+        dataIndex,
+        beforeDataRendered,
+        emit,
+      } = config;
       // 获取配置的静态数据
       let origin = _dataSource;
       // 存在dataIndex，从data中获取
@@ -36,6 +41,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         origin = beforeDataRendered(origin, data);
       }
 
+      _config.dataSource = origin;
       // 执行所有中间件
       middlewareInstance?.forEach((item) => {
         const { emit, defineConfig } = item;
@@ -54,8 +60,16 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
             __origin: origin,
             __data: data,
           });
+          origin = _config.dataSource;
         }
       });
+
+      if (emit) {
+        _config = {
+          ..._config,
+          ...emit(_config),
+        };
+      }
 
       const {
         type,
@@ -69,8 +83,6 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         render: renderComponent,
         ...fields
       } = _config;
-
-      origin = dataSource;
 
       let Component: any = _pfcs?.[type];
       if (!Component) {
@@ -98,7 +110,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       }
 
       const jsx = Component ? (
-        <Component {...fieldProps} {...fields} dataSource={origin}>
+        <Component {...fieldProps} {...fields} dataSource={dataSource}>
           {childrenJsx}
         </Component>
       ) : null;

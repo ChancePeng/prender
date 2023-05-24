@@ -1,10 +1,10 @@
-import type { FC, PropsWithChildren, CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, FC, PropsWithChildren } from 'react';
 
 interface PFCProps<T> extends PropsWithChildren {
-  style?: CSSProperties,
-  className?: string,
-  readonly dataSource?: T,
-  bordered?: boolean,
+  style?: CSSProperties;
+  className?: string;
+  readonly dataSource?: T;
+  bordered?: boolean;
 }
 
-export type PFC<T=unknown, P = Record<string, any>[]> = FC<T & PFCProps<P>>
+export type PFC<T = unknown, P = Record<string, any>[]> = FC<T & PFCProps<P>>;
