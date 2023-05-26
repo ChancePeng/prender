@@ -15,14 +15,19 @@ type Tag = 'h1' | 'h2' | 'h3' | 'h4';
 interface Option {
   language?: 'chinese' | 'arba';
   tags?: Tag[];
+  startIndex?: number[];
 }
 
 const initOption = (option?: Option) => {
-  const { language = 'chinese', tags = ['h1', 'h2', 'h3', 'h4'] } =
-    option || {};
+  const {
+    language = 'chinese',
+    tags = ['h1', 'h2', 'h3', 'h4'],
+    startIndex = [0, 0, 0, 0],
+  } = option || {};
   return {
     language,
     tags,
+    startIndex,
   } as Option;
 };
 
@@ -30,8 +35,9 @@ class HeadlinePlugin implements PluginImplements<number[]> {
   value: number[] | null | undefined;
   option: any;
   constructor(option?: Option) {
-    this.value = [0, 0, 0, 0];
     this.option = initOption(option);
+    const { startIndex = [0, 0, 0, 0] } = this.option;
+    this.value = startIndex;
   }
   emit(props: HeadlineProps) {
     const { tag = 'h1' } = props;
@@ -55,6 +61,8 @@ class HeadlinePlugin implements PluginImplements<number[]> {
         this.value?.filter((_, index) => index <= tagIndex).join('.') || '';
       if (tag === 'h1' && this.option.language === 'chinese') {
         title = `${convertToChinaNum(Number.parseInt(title))}、`;
+      } else {
+        title = `${title} `;
       }
       return React.createElement(Fragment, {}, title, dom);
     }

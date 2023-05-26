@@ -1,15 +1,17 @@
 import classnames from 'classnames';
 import { get } from 'lodash';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
+import ConfigContext from '../ConfigProvider';
 import type { PFC } from '../type';
 import type { TableProps } from './type';
 
 import './index.less';
 
+const prefixCls = 'pfc-table';
 const Table: PFC<TableProps> = (props) => {
-  const prefixCls = 'pfc-table';
-  const { dataSource, bordered, className, columns, style, renderEmpty } =
-    props;
+  const { dataSource, bordered, className, columns, style } = props;
+
+  const { renderEmpty } = useContext(ConfigContext);
 
   const classes = classnames(
     prefixCls,
@@ -19,7 +21,7 @@ const Table: PFC<TableProps> = (props) => {
     className,
   );
 
-  const renderCell = (record?: Record<string, any>) => {
+  const renderCell = (record?: Record<string, any>, _index?: number) => {
     if (!record) {
       return columns?.map((column, index) => {
         return (
@@ -38,7 +40,7 @@ const Table: PFC<TableProps> = (props) => {
         } else if (dataIndex) {
           data = get(record, dataIndex || '');
         }
-        const inner = render ? render(data, record || {}, index) : data;
+        const inner = render ? render(data, record || {}, _index) : data;
         return (
           <td
             key={index}
@@ -69,7 +71,7 @@ const Table: PFC<TableProps> = (props) => {
     return dataSource?.map((record, index) => {
       return (
         <tr key={index} className={`${prefixCls}-row`}>
-          {renderCell(record)}
+          {renderCell(record, index)}
         </tr>
       );
     });

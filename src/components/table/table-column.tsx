@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { get } from 'lodash';
-import React from 'react';
+import React, { useContext } from 'react';
+import ConfigContext from '../ConfigProvider';
 
 import './index.less';
 
@@ -10,9 +11,9 @@ import { TableProps } from './type';
 import type { TableColumnType } from './type';
 
 const TableColumn: PFC<TableProps> = (props) => {
-  const { className, columns, bordered, dataSource, style, renderEmpty } =
-    props;
+  const { className, columns, bordered, dataSource, style } = props;
   const prefixCls = 'pfc-table';
+  const { renderEmpty } = useContext(ConfigContext);
 
   const classes = classnames(
     prefixCls,
