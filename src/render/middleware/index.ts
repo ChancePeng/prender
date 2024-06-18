@@ -1,9 +1,3 @@
-import { CountMiddleware } from './preinstall';
+export { default as CountMiddleware } from './count';
 
-const MiddlewarePreInstall = {
-  CountMiddleware,
-};
-
-export { default as initMiddlewares } from './init';
 export * from './type';
-export { MiddlewarePreInstall };

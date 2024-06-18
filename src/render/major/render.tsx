@@ -1,79 +1,80 @@
+import * as PComponent from '@/components';
 import { get, isEmpty } from 'lodash';
-import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import * as PdfComponents from '../../components';
-import initMiddlewares from '../middleware/init';
-import renderFooter from './footer';
-import getShowStaus from './getShowStatus';
-import renderHeader from './header';
-import type { IConfig, Options } from './typs';
+import MiddlewareCore from '../middleware/core';
+import { isVisible, renderContent } from './utils';
+
+import type { FunctionComponent, ReactNode } from 'react';
+import type { Options } from '../types';
+import type { IConfig, RuntimeConfig } from './types';
+
+const analysisConfig = (config: IConfig) => {
+  const {
+    type,
+    instanceOf,
+    beforeDataRendered,
+    renderEmpty,
+    render,
+    defineConfig,
+    ...fields
+  } = config;
+  return {
+    base: fields,
+    execute: {
+      type,
+      instanceOf,
+      beforeDataRendered,
+      renderEmpty,
+      render,
+      defineConfig,
+    },
+  };
+};
 
 const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
-  const { pfcs, data, middlewares = [] } = options;
+  const { pfcs, data, middlewares = [], onFinished } = options;
   const _pfcs: Record<string, FunctionComponent> = {
-    ...PdfComponents,
+    ...(PComponent as any),
     ...pfcs,
   };
   // 初始化中间件
-  const middlewareInstance = initMiddlewares(middlewares);
+  const middleCore = new MiddlewareCore(middlewares);
+  const length = configs.length;
   return (function () {
-    return configs.map((config, index) => {
-      let _config = config;
-      const {
-        dataSource: _dataSource,
-        dataIndex,
-        beforeDataRendered,
-        emit,
-      } = config;
-      // 获取配置的静态数据
-      let origin = _dataSource;
+    return configs.map((_config, index) => {
+      const { execute, base } = analysisConfig(_config);
+
+      const { dataIndex } = base;
+      const { beforeDataRendered, defineConfig } = execute;
+
       // 存在dataIndex，从data中获取
       // 多值情况
       if (dataIndex instanceof Array) {
-        origin = dataIndex.map((key) => get(data, key));
+        base.dataSource = dataIndex.map((key) => get(data, key));
       } else if (dataIndex) {
         // 单值情况
-        origin = get(data, dataIndex);
+        base.dataSource = get(data, dataIndex);
       }
-
       // data的中间处理函数
       if (beforeDataRendered) {
-        origin = beforeDataRendered(origin, data);
+        base.dataSource = beforeDataRendered(base.dataSource, { ...data });
       }
 
-      _config.dataSource = origin;
+      if (defineConfig) {
+        defineConfig.call(base, base);
+      }
+
+      const runtime: RuntimeConfig = {
+        ...base,
+        ...execute,
+        __config: _config,
+        __data: data,
+      };
       // 执行所有中间件
-      middlewareInstance?.forEach((item) => {
-        const { emit, defineConfig } = item;
-        if (emit) {
-          const _emit = emit.bind(item);
-          _emit({
-            ...config,
-            __origin: origin,
-            __data: data,
-          });
-        }
-        if (defineConfig) {
-          const _defineConfig = defineConfig.bind(item);
-          _config = _defineConfig({
-            ...config,
-            __origin: origin,
-            __data: data,
-          });
-          origin = _config.dataSource;
-        }
-      });
-
-      if (emit) {
-        _config = {
-          ..._config,
-          ...emit(_config),
-        };
-      }
+      middleCore.execute(runtime);
 
       const {
         type,
-        visible = true,
         fieldProps,
         children,
         header,
@@ -82,26 +83,27 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         dataSource,
         render: renderComponent,
         ...fields
-      } = _config;
+      } = runtime;
 
       let Component: any = _pfcs?.[type];
+
       if (!Component) {
         return <React.Fragment key={index} />;
       }
 
-      const show = getShowStaus({ visible, origin, dataIndex, data });
+      const show = isVisible(runtime);
 
       if (!show) {
         return <React.Fragment key={index} />;
       }
 
       // 展示当前组件当data为空的时候
-      if (isEmpty(origin) && renderEmpty) {
-        Component = renderEmpty(data);
+      if (isEmpty(runtime.dataSource) && renderEmpty) {
+        Component = renderEmpty(data, base);
       }
 
       if (renderComponent) {
-        Component = renderComponent(origin, data, Component);
+        Component = renderComponent(runtime.dataSource, data, Component);
       }
 
       let childrenJsx = undefined;
@@ -114,8 +116,13 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
           {childrenJsx}
         </Component>
       ) : null;
-      const Header = renderHeader(header, origin, data);
-      const Footer = renderFooter(footer, origin, data);
+
+      const Header = renderContent(header, runtime.dataSource, data);
+      const Footer = renderContent(footer, runtime.dataSource, data);
+
+      if (length === index + 1) {
+        onFinished?.();
+      }
 
       return (
         <div className="pfc-config-item" key={index}>
@@ -129,4 +136,4 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
 };
 
 export default renderInstance;
-export * from './typs';
+export type ComponentType = keyof typeof PComponent;

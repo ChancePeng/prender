@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { get } from 'lodash';
 import React, { useContext } from 'react';
-import ConfigContext from '../ConfigProvider';
+import ConfigContext from '../ConfigContext';
 
 import './index.less';
 

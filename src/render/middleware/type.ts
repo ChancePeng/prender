@@ -1,16 +1,17 @@
-import { IConfig } from "../major/typs";
+import { RuntimeConfig } from '../major/types';
 
-
-export type MiddlewareType<T = unknown> = (IMiddleware<T> | {
-  use: IMiddleware<T>,
-  option: T
-})[];
+export type MiddlewareType<T = unknown> = (
+  | IMiddleware<T>
+  | {
+      use: IMiddleware<T>;
+      option: T;
+    }
+)[];
 
 export interface MiddlewareImplements {
-  emit?: (config:IConfig) => void;
-  defineConfig?: (config:IConfig) => IConfig
+  run(config: RuntimeConfig, next: () => void): void;
 }
 
 export interface IMiddleware<T> {
-  new(value?:T): MiddlewareImplements,
+  new (value?: T): MiddlewareImplements;
 }
