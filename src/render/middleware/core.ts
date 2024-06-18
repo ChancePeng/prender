@@ -20,8 +20,7 @@ class MiddlewareCore {
   execute(runtime: RuntimeConfig) {
     this.state = true;
     const arr = [...this.middlewares];
-    let bool = true;
-    while (arr.length && bool) {
+    while (arr.length && this.state) {
       const middleware = arr.pop();
       this.state = false;
       middleware?.run.call(middleware, runtime, this.next);
