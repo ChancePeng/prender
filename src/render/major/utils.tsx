@@ -1,6 +1,7 @@
 import { Mark } from '@/components';
 import isEmpty from 'lodash/isEmpty';
 import React from 'react';
+import type { IConfig } from './types';
 
 import type { ReactNode } from 'react';
 import type { RuntimeConfig } from './types';
@@ -33,4 +34,63 @@ export const renderContent = (
     return <Mark dataSource={render} />;
   }
   return render instanceof Function ? render(data, record) : render;
+};
+
+export const analysisConfig = (config: IConfig) => {
+  const {
+    type,
+    instanceOf,
+    beforeDataRendered,
+    renderEmpty,
+    render,
+    defineConfig,
+    ...fields
+  } = config;
+  return {
+    base: fields,
+    execute: {
+      type,
+      instanceOf,
+      beforeDataRendered,
+      renderEmpty,
+      render,
+      defineConfig,
+    },
+  };
+};
+
+export const defineProps = (runtime: RuntimeConfig) => {
+  const {
+    fieldProps,
+    dataSource,
+    dataIndex,
+    className,
+    style,
+    columns,
+    __data,
+    __config,
+    bordered,
+    visible,
+  } = runtime;
+  const props: any = {
+    dataIndex,
+    dataSource,
+    className,
+    style,
+    columns,
+    bordered,
+    visible,
+    __data,
+    __config,
+    ...fieldProps,
+  };
+  Object.keys(props).forEach((key) => {
+    if (key.startsWith('__')) {
+      return;
+    }
+    if (props[key] === null || props[key] === undefined) {
+      delete props[key];
+    }
+  });
+  return props;
 };

@@ -2,70 +2,11 @@ import * as PComponent from '@/components';
 import { get, isEmpty } from 'lodash';
 import React from 'react';
 import MiddlewareCore from '../middleware/core';
-import { isVisible, renderContent } from './utils';
+import { analysisConfig, defineProps, isVisible, renderContent } from './utils';
 
 import type { FunctionComponent, ReactNode } from 'react';
 import type { Options } from '../types';
 import type { IConfig, RuntimeConfig } from './types';
-
-const analysisConfig = (config: IConfig) => {
-  const {
-    type,
-    instanceOf,
-    beforeDataRendered,
-    renderEmpty,
-    render,
-    defineConfig,
-    ...fields
-  } = config;
-  return {
-    base: fields,
-    execute: {
-      type,
-      instanceOf,
-      beforeDataRendered,
-      renderEmpty,
-      render,
-      defineConfig,
-    },
-  };
-};
-
-const defineProps = (runtime: RuntimeConfig) => {
-  const {
-    fieldProps,
-    dataSource,
-    dataIndex,
-    className,
-    style,
-    columns,
-    __data,
-    __config,
-    bordered,
-    visible,
-  } = runtime;
-  const props: any = {
-    dataIndex,
-    dataSource,
-    className,
-    style,
-    columns,
-    bordered,
-    visible,
-    __data,
-    __config,
-    ...fieldProps,
-  };
-  Object.keys(props).forEach((key) => {
-    if (key.startsWith('__')) {
-      return;
-    }
-    if (props[key] === null || props[key] === undefined) {
-      delete props[key];
-    }
-  });
-  return props;
-};
 
 const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
   const { pfcs, data, middlewares = [], onFinished } = options;
@@ -75,9 +16,8 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
   };
   // 初始化中间件
   const middleCore = new MiddlewareCore(middlewares);
-  const length = configs.length;
   return (function () {
-    return configs.map((_config, index) => {
+    const content = configs.map((_config, index) => {
       const { execute, base } = analysisConfig(_config);
 
       const { dataIndex } = base;
@@ -153,10 +93,6 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       const Header = renderContent(header, runtime.dataSource, data);
       const Footer = renderContent(footer, runtime.dataSource, data);
 
-      if (length === index + 1) {
-        onFinished?.();
-      }
-
       return (
         <div className="pfc-config-item" key={index}>
           {Header}
@@ -165,6 +101,10 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         </div>
       );
     });
+    onFinished?.({
+      middlewares: middleCore.middlewares,
+    });
+    return content;
   })();
 };
 

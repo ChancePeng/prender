@@ -12,6 +12,7 @@ const Pagination: FC<PaginationProps> = (props) => {
     className,
     pfcs = {},
     middlewares,
+    onFinished,
   } = props;
   const prefixCls = 'pfc-pagination';
   const classes = classnames(prefixCls, className);
@@ -21,6 +22,7 @@ const Pagination: FC<PaginationProps> = (props) => {
         pfcs,
         data,
         middlewares,
+        onFinished,
       })}
     </div>
   );
