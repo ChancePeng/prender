@@ -31,6 +31,42 @@ const analysisConfig = (config: IConfig) => {
   };
 };
 
+const defineProps = (runtime: RuntimeConfig) => {
+  const {
+    fieldProps,
+    dataSource,
+    dataIndex,
+    className,
+    style,
+    columns,
+    __data,
+    __config,
+    bordered,
+    visible,
+  } = runtime;
+  const props: any = {
+    dataIndex,
+    dataSource,
+    className,
+    style,
+    columns,
+    bordered,
+    visible,
+    __data,
+    __config,
+    ...fieldProps,
+  };
+  Object.keys(props).forEach((key) => {
+    if (key.startsWith('__')) {
+      return;
+    }
+    if (props[key] === null || props[key] === undefined) {
+      delete props[key];
+    }
+  });
+  return props;
+};
+
 const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
   const { pfcs, data, middlewares = [], onFinished } = options;
   const _pfcs: Record<string, FunctionComponent> = {
@@ -75,14 +111,11 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
 
       const {
         type,
-        fieldProps,
         children,
         header,
         footer,
         renderEmpty,
-        dataSource,
         render: renderComponent,
-        ...fields
       } = runtime;
 
       let Component: any = _pfcs?.[type];
@@ -111,10 +144,10 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         childrenJsx = renderInstance(children, options);
       }
 
+      const props = defineProps(runtime);
+
       const jsx = Component ? (
-        <Component {...fieldProps} {...fields} dataSource={dataSource}>
-          {childrenJsx}
-        </Component>
+        <Component {...props}>{childrenJsx}</Component>
       ) : null;
 
       const Header = renderContent(header, runtime.dataSource, data);
