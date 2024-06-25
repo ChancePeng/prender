@@ -46,6 +46,8 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         __config: _config,
         __data: data,
       };
+
+      runtime.visible = isVisible(runtime);
       // 执行所有中间件
       middleCore.execute(runtime);
 

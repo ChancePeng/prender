@@ -2,6 +2,7 @@ import React, { createContext, ReactNode } from 'react';
 
 interface IConfigProvierProps {
   renderEmpty?: () => ReactNode;
+  [data: string | number | symbol]: any;
 }
 
 const defaultContext = {

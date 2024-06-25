@@ -9,7 +9,7 @@ export type MiddlewareType<T = unknown> = (
 )[];
 
 export interface MiddlewareImplements {
-  run(config: RuntimeConfig, next: () => void): void;
+  run(config: RuntimeConfig, next: () => void | Promise<void>): void;
 }
 
 export interface IMiddleware<T> {

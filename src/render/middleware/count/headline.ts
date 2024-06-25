@@ -26,8 +26,12 @@ class HeadlineCount implements MiddlewareImplements {
     });
     return str;
   };
-  run(config: RuntimeConfig, next: () => void): void {
-    const { type, instanceOf, fieldProps, dataSource } = config;
+  run(config: RuntimeConfig, next: () => void | Promise<void>): void {
+    const { type, instanceOf, fieldProps, dataSource, visible = true } = config;
+    if (!visible) {
+      next();
+      return;
+    }
     const tag: string = fieldProps?.tag || 'h1';
     const key = instanceOf ?? type;
     if (key === 'Headline') {

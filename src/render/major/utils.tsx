@@ -72,11 +72,10 @@ export const defineProps = (runtime: RuntimeConfig) => {
     bordered,
     visible,
   } = runtime;
-  const props: any = {
+
+  const base: any = {
     dataIndex,
     dataSource,
-    className,
-    style,
     columns,
     bordered,
     visible,
@@ -84,13 +83,17 @@ export const defineProps = (runtime: RuntimeConfig) => {
     __config,
     ...fieldProps,
   };
+  const props: any = {
+    className,
+    style,
+  };
   Object.keys(props).forEach((key) => {
-    if (key.startsWith('__')) {
-      return;
-    }
     if (props[key] === null || props[key] === undefined) {
       delete props[key];
     }
   });
-  return props;
+  return {
+    ...base,
+    ...props,
+  };
 };
