@@ -2,13 +2,15 @@ import React, { createContext, ReactNode } from 'react';
 
 interface IConfigProvierProps {
   renderEmpty?: () => ReactNode;
+  columnEmptyText?: string | false;
   [data: string | number | symbol]: any;
 }
 
-const defaultContext = {
+const defaultContext: IConfigProvierProps = {
   renderEmpty: () => {
     return <div>no data</div>;
   },
+  columnEmptyText: false,
 };
 
 const ConfigContext = createContext<IConfigProvierProps>(defaultContext);

@@ -5,4 +5,5 @@ export interface TableColumnType<T> extends ColumnType<T> {
 }
 export interface TableProps<T = Record<string, any>> {
   columns?: TableColumnType<T>[];
+  columnEmptyText?: string | false;
 }

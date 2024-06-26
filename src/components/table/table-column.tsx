@@ -11,9 +11,13 @@ import { TableProps } from './type';
 import type { TableColumnType } from './type';
 
 const TableColumn: PFC<TableProps> = (props) => {
-  const { className, columns, bordered, dataSource, style } = props;
+  const { className, columns, bordered, dataSource, style, columnEmptyText } =
+    props;
   const prefixCls = 'pfc-table';
-  const { renderEmpty } = useContext(ConfigContext);
+  const { renderEmpty, columnEmptyText: globalColumnEmptyText } =
+    useContext(ConfigContext);
+
+  const emptyText = columnEmptyText ?? globalColumnEmptyText;
 
   const classes = classnames(
     prefixCls,
@@ -37,13 +41,14 @@ const TableColumn: PFC<TableProps> = (props) => {
         data = get(record, dataIndex);
       }
       const inner = render ? render(data, record, index) : data;
+      const content = emptyText ? inner ?? emptyText : inner;
       return (
         <td
           key={i}
           className={`${prefixCls}-cell`}
           style={{ textAlign: align || 'left' }}
         >
-          {inner}
+          {content}
         </td>
       );
     });

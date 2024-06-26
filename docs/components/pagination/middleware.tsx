@@ -1,10 +1,11 @@
-import { CountMiddleware, Pagination } from '@change/prender';
+import { ConfigContext, CountMiddleware, Pagination } from '@change/prender';
 import React from 'react';
 
 const columns = [
   { dataIndex: 'name', title: '年龄' },
   { dataIndex: 'age', title: '姓名' },
   { dataIndex: 'sex', title: '性别' },
+  { data: 'love', title: '爱好' },
 ];
 
 const data = {
@@ -62,15 +63,20 @@ const config = [
   },
   {
     type: 'Table',
+    fieldProps: {
+      columnEmptyText: '----',
+    },
     columns,
     dataSource: [data],
     bordered: true,
   },
 ];
 export default () => (
-  <Pagination
-    config={config}
-    water="hello"
-    middlewares={[CountMiddleware.Headline]}
-  />
+  <ConfigContext.Provider value={{ columnEmptyText: '-' }}>
+    <Pagination
+      config={config}
+      water="hello"
+      middlewares={[CountMiddleware.Headline]}
+    />
+  </ConfigContext.Provider>
 );

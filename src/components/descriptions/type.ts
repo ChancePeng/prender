@@ -7,4 +7,5 @@ export interface DescriptionsColumnType<T>
 export interface DescriptionsProps<T = Record<string, any>> {
   column?: number;
   columns?: DescriptionsColumnType<T>[];
+  columnEmptyText?: string | false;
 }

@@ -1,14 +1,25 @@
 import classnames from 'classnames';
 import { get } from 'lodash';
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
+import ConfigContext from '../ConfigContext';
 import type { PFC } from '../type';
 import type { DescriptionsColumnType, DescriptionsProps } from './type';
 
 import './index.less';
 
 const Descriptions: PFC<DescriptionsProps> = (props) => {
-  const { column = 3, dataSource, columns, style, className, bordered } = props;
+  const {
+    column = 3,
+    dataSource,
+    columns,
+    style,
+    className,
+    bordered,
+    columnEmptyText,
+  } = props;
   const prefixCls = 'pfc-descriptions';
+  const { columnEmptyText: globalColumnEmptyText } = useContext(ConfigContext);
+  const emptyText = columnEmptyText ?? globalColumnEmptyText;
   const classes = classnames(
     prefixCls,
     {
@@ -48,6 +59,7 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
       data = get(dataSource, dataIndex);
     }
     const inner = render ? render(data, dataSource, index) : data;
+    const content = emptyText ? inner ?? emptyText : inner;
     if (bordered) {
       return (
         <React.Fragment key={index}>
@@ -58,7 +70,7 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
             className={`${prefixCls}-cell ${prefixCls}-cell-content`}
             colSpan={span}
           >
-            {inner}
+            {content}
           </td>
         </React.Fragment>
       );
