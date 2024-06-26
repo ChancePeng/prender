@@ -8,14 +8,14 @@ interface Option {
 }
 
 class HeadlineCount implements MiddlewareImplements {
-  count: number[];
-  language: 'chinese' | 'arba';
+  private count: number[];
+  private language: 'chinese' | 'arba';
   constructor(option: Option) {
     const { level = 3, language = 'chinese' } = option || {};
     this.count = new Array(level).fill(0);
     this.language = language;
   }
-  stringify = (endIndex: number) => {
+  private stringify = (endIndex: number) => {
     let str = '';
     this.count.forEach((num, index) => {
       if (index === 0) {
