@@ -1,5 +1,4 @@
-import { Pagination } from '@change/prender';
-import { MiddlewarePreInstall } from '@change/prender/render';
+import { CountMiddleware, Pagination } from '@change/prender';
 import React from 'react';
 
 const columns = [
@@ -28,12 +27,50 @@ const config = [
     dataSource: [data],
     bordered: true,
   },
+  {
+    type: 'Headline',
+    fieldProps: {
+      tag: 'h1',
+    },
+    dataSource: '这是一级标题',
+  },
+  {
+    type: 'Table',
+    columns,
+    dataSource: [data],
+    bordered: true,
+  },
+  {
+    type: 'Headline',
+    fieldProps: {
+      tag: 'h1',
+    },
+    dataSource: '这是一级标题',
+  },
+  {
+    type: 'Table',
+    columns,
+    dataSource: [data],
+    bordered: true,
+  },
+  {
+    type: 'Headline',
+    fieldProps: {
+      tag: 'h1',
+    },
+    dataSource: '这是一级标题',
+  },
+  {
+    type: 'Table',
+    columns,
+    dataSource: [data],
+    bordered: true,
+  },
 ];
 export default () => (
   <Pagination
     config={config}
-    middlewares={[
-      { use: MiddlewarePreInstall.CountMiddleware, option: ['Headline'] },
-    ]}
+    water="hello"
+    middlewares={[CountMiddleware.Headline]}
   />
 );

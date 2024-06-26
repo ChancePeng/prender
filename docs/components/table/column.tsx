@@ -16,6 +16,11 @@ const columns = [
   },
 ];
 
+const dataSource = [
+  { name: 'change', age: 26, sex: '男' },
+  { name: 'junny', age: 23, sex: '女' },
+];
+
 export default () => (
-  <Table.Column bordered columns={columns} dataSource={[]} />
+  <Table.Column bordered columns={columns} dataSource={dataSource} />
 );

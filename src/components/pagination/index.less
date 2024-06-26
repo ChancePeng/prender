@@ -1,0 +1,28 @@
+.water-styles {
+  width: 100%;
+  height: 100%;
+  background: var(--pfc-pagination-water-bkg-url) left top;
+  color: #e2e2e2;
+}
+
+.pfc-pagination {
+  position: relative;
+
+  &-water {
+    &-above {
+      &::after {
+        content: '';
+        z-index: 999;
+        left: 0;
+        top: 0;
+        position: absolute;
+
+        .water-styles();
+      }
+    }
+
+    &-default {
+      .water-styles();
+    }
+  }
+}
