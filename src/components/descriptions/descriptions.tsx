@@ -15,6 +15,8 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
     style,
     className,
     bordered,
+    htmlAttributes,
+    id,
     columnEmptyText,
   } = props;
   const prefixCls = 'pfc-descriptions';
@@ -86,7 +88,7 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
   };
 
   return (
-    <div className={classes} style={style}>
+    <div {...htmlAttributes} id={id} className={classes} style={style}>
       <table className={`${prefixCls}-table`}>
         <tbody>
           {rows?.map((cells, index) => {

@@ -15,6 +15,7 @@ const Pagination: FC<PaginationProps> = (props) => {
     style: _style = {},
     className,
     water,
+    id,
     pfcs = {},
     middlewares,
     onFinished,
@@ -41,7 +42,7 @@ const Pagination: FC<PaginationProps> = (props) => {
   }, [water]);
 
   return (
-    <div className={classes} style={{ ...style, ..._style }}>
+    <div className={classes} style={{ ...style, ..._style }} id={id}>
       {render(config, {
         pfcs,
         data,

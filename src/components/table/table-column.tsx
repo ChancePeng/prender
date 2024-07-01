@@ -11,8 +11,16 @@ import { TableProps } from './type';
 import type { TableColumnType } from './type';
 
 const TableColumn: PFC<TableProps> = (props) => {
-  const { className, columns, bordered, dataSource, style, columnEmptyText } =
-    props;
+  const {
+    className,
+    columns,
+    bordered,
+    dataSource,
+    style,
+    columnEmptyText,
+    id,
+    htmlAttributes,
+  } = props;
   const prefixCls = 'pfc-table';
   const { renderEmpty, columnEmptyText: globalColumnEmptyText } =
     useContext(ConfigContext);
@@ -83,7 +91,7 @@ const TableColumn: PFC<TableProps> = (props) => {
   };
 
   return (
-    <div className={classes} style={style}>
+    <div {...htmlAttributes} id={id} className={classes} style={style}>
       <table className={`${prefixCls}-table`}>
         <tbody>{renderRow()}</tbody>
       </table>

@@ -9,8 +9,16 @@ import './index.less';
 
 const prefixCls = 'pfc-table';
 const Table: PFC<TableProps> = (props) => {
-  const { dataSource, bordered, className, columns, style, columnEmptyText } =
-    props;
+  const {
+    dataSource,
+    bordered,
+    className,
+    columns,
+    style,
+    columnEmptyText,
+    htmlAttributes,
+    id,
+  } = props;
 
   const { renderEmpty, columnEmptyText: globalColumnEmptyText } =
     useContext(ConfigContext);
@@ -83,7 +91,7 @@ const Table: PFC<TableProps> = (props) => {
   };
 
   return (
-    <div className={classes} style={style}>
+    <div {...htmlAttributes} id={id} className={classes} style={style}>
       <table>
         <thead className={`${prefixCls}-thead`}>
           <tr className={`${prefixCls}-row`}>{renderCell()}</tr>

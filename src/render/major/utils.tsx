@@ -70,6 +70,7 @@ export const defineProps = (runtime: RuntimeConfig) => {
     __data,
     __config,
     bordered,
+    htmlAttributes,
     visible,
   } = runtime;
 
@@ -86,6 +87,7 @@ export const defineProps = (runtime: RuntimeConfig) => {
   const props: any = {
     className,
     style,
+    htmlAttributes,
   };
   Object.keys(props).forEach((key) => {
     if (props[key] === null || props[key] === undefined) {

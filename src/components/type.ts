@@ -1,10 +1,18 @@
-import type { CSSProperties, FC, PropsWithChildren, ReactNode } from 'react';
+import type {
+  CSSProperties,
+  FC,
+  HTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+} from 'react';
 
-interface PFCProps<T> extends PropsWithChildren {
+interface PFCProps<T, P = never> extends PropsWithChildren {
   style?: CSSProperties;
   className?: string;
   readonly dataSource?: T;
   bordered?: boolean;
+  id?: string;
+  htmlAttributes?: Omit<HTMLAttributes<P>, 'id' | 'className' | 'style'>;
 }
 
 export interface ColumnType<T = any> {
@@ -14,4 +22,6 @@ export interface ColumnType<T = any> {
   render?: (value?: any, record?: T, index?: number) => ReactNode;
 }
 
-export type PFC<T = unknown, P = Record<string, any>[]> = FC<T & PFCProps<P>>;
+export type PFC<T = unknown, P = Record<string, any>[], K = never> = FC<
+  T & PFCProps<P, K>
+>;

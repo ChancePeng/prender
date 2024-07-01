@@ -14,7 +14,7 @@ export interface PaginationProps {
   style?: CSSProperties;
   water?: Water;
   className?: string;
-  above?: boolean;
+  id?: string;
   pfcs?: Record<any, any>;
   middlewares?: MiddlewareType;
   onFinished?: Options['onFinished'];

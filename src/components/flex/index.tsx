@@ -6,7 +6,7 @@ import type { PFC } from '../type';
 import './index.less';
 
 const Flex: PFC = (props) => {
-  const { className, style, bordered, children } = props;
+  const { className, style, bordered, children, htmlAttributes, id } = props;
   const prefixCls = 'pfc-flex';
   const classes = classnames(
     prefixCls,
@@ -16,7 +16,7 @@ const Flex: PFC = (props) => {
     className,
   );
   return (
-    <div className={classes} style={style}>
+    <div {...htmlAttributes} className={classes} style={style} id={id}>
       {children}
     </div>
   );
