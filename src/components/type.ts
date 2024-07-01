@@ -6,15 +6,19 @@ import type {
   ReactNode,
 } from 'react';
 
-interface PFCProps<T, P = never> extends PropsWithChildren {
-  style?: CSSProperties;
-  className?: string;
-  readonly dataSource?: T;
-  bordered?: boolean;
-  id?: string;
-  htmlAttributes?: Omit<HTMLAttributes<P>, 'id' | 'className' | 'style'>;
-}
+import type { IConfig } from '@/render';
 
+export interface PFCProps<T = any, P = never> {
+  id?: string;
+  className?: string;
+  style?: CSSProperties;
+  dataIndex?: string | string[];
+  dataSource?: T;
+  bordered?: boolean;
+  htmlAttributes: HTMLAttributes<P>;
+  __data?: any;
+  __config?: IConfig;
+}
 export interface ColumnType<T = any> {
   align?: 'left' | 'right' | 'center';
   dataIndex?: string | string[];
@@ -22,6 +26,8 @@ export interface ColumnType<T = any> {
   render?: (value?: any, record?: T, index?: number) => ReactNode;
 }
 
+type PFCPropsWithChildren<T, P> = PFCProps<T, P> & PropsWithChildren;
+
 export type PFC<T = unknown, P = Record<string, any>[], K = never> = FC<
-  T & PFCProps<P, K>
+  T & PFCPropsWithChildren<P, K>
 >;
