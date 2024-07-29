@@ -1,5 +1,5 @@
-import { IConfig } from '@/render';
-import { MiddlewareImplements } from '../type';
+import type { IConfig } from '@/render';
+import type { MiddlewareImplements } from '../type';
 import { convertToChinaNum } from './utils';
 
 interface Option {

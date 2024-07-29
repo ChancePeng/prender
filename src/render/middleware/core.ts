@@ -1,5 +1,5 @@
-import { RuntimeConfig } from '../major/types';
-import { MiddlewareType } from './type';
+import type { IConfig } from '../major/types';
+import type { MiddlewareType } from './type';
 
 class MiddlewareCore {
   middlewares;
@@ -17,7 +17,7 @@ class MiddlewareCore {
   next = () => {
     this.state = true;
   };
-  execute(runtime: RuntimeConfig) {
+  execute(runtime: IConfig) {
     this.state = true;
     const arr = [...this.middlewares];
     while (arr.length && this.state) {

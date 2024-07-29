@@ -1,4 +1,4 @@
-import { RuntimeConfig } from '../major/types';
+import { IConfig } from '../major/types';
 
 export type MiddlewareType<T = unknown> = (
   | IMiddleware<T>
@@ -9,7 +9,7 @@ export type MiddlewareType<T = unknown> = (
 )[];
 
 export interface MiddlewareImplements {
-  run(config: RuntimeConfig, next: () => void | Promise<void>): void;
+  run(config: IConfig, next: () => void | Promise<void>): void;
 }
 
 export interface IMiddleware<T> {

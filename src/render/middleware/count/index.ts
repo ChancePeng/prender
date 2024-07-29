@@ -1,5 +1,5 @@
-import { RuntimeConfig } from 'prender/render/major';
-import { MiddlewareImplements } from '../type';
+import type { IConfig } from '@/render';
+import type { MiddlewareImplements } from '../type';
 import HeadlineCount from './headline';
 
 class CountMiddlewareBase implements MiddlewareImplements {
@@ -11,7 +11,7 @@ class CountMiddlewareBase implements MiddlewareImplements {
     });
     this.count = count;
   }
-  run(config: RuntimeConfig, next: () => void): void {
+  run(config: IConfig, next: () => void): void {
     const { type, instanceOf } = config;
     const key = instanceOf ?? type;
     if (key) {
