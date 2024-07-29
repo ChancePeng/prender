@@ -1,4 +1,4 @@
-import { RuntimeConfig } from 'prender/render/major';
+import { IConfig } from '@/render';
 import { MiddlewareImplements } from '../type';
 import { convertToChinaNum } from './utils';
 
@@ -26,7 +26,19 @@ class HeadlineCount implements MiddlewareImplements {
     });
     return str;
   };
-  run(config: RuntimeConfig, next: () => void | Promise<void>): void {
+  next = (level: number) => {
+    this.count.forEach((_, index) => {
+      if (index <= level) {
+        if (index === level) {
+          this.count[index] += 1;
+        }
+      } else {
+        this.count[index] = 0;
+      }
+    });
+    return this.count;
+  };
+  run(config: IConfig, next: () => void | Promise<void>): void {
     const { type, instanceOf, fieldProps, dataSource, visible = true } = config;
     if (!visible) {
       next();
