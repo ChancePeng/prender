@@ -1,13 +1,11 @@
 import { Mark } from '@/components';
 import isEmpty from 'lodash/isEmpty';
+import type { ReactNode } from 'react';
 import React from 'react';
 import type { IConfig } from './types';
 
-import type { ReactNode } from 'react';
-import type { RuntimeConfig } from './types';
-
-export const isVisible = (config: RuntimeConfig) => {
-  const { visible = true, dataIndex, dataSource, __data } = config;
+export const isVisible = (config: IConfig, data?: any) => {
+  const { visible = true, dataIndex, dataSource } = config;
   if (typeof visible === 'boolean') {
     return visible;
   }
@@ -20,7 +18,7 @@ export const isVisible = (config: RuntimeConfig) => {
     }
   }
   if (typeof visible === 'function') {
-    return visible(dataSource, __data);
+    return visible(dataSource, data);
   }
   return !!visible;
 };
@@ -59,7 +57,7 @@ export const analysisConfig = (config: IConfig) => {
   };
 };
 
-export const defineProps = (runtime: RuntimeConfig) => {
+export const defineProps = (runtime: IConfig) => {
   const {
     fieldProps,
     dataSource,
@@ -67,8 +65,6 @@ export const defineProps = (runtime: RuntimeConfig) => {
     className,
     style,
     columns,
-    __data,
-    __config,
     bordered,
     htmlAttributes,
     visible,
@@ -80,8 +76,6 @@ export const defineProps = (runtime: RuntimeConfig) => {
     columns,
     bordered,
     visible,
-    __data,
-    __config,
     ...fieldProps,
   };
   const props: any = {

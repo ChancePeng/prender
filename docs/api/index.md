@@ -6,3 +6,7 @@ nav:
 group:
   title: 快速开始
 ---
+
+# useRuntime
+
+<code src='./runtime.tsx'></code>

@@ -1,4 +1,5 @@
 import * as PComponent from '@/components';
+import context from '@/context';
 import { get, isEmpty } from 'lodash';
 import React from 'react';
 import MiddlewareCore from '../middleware/core';
@@ -6,7 +7,7 @@ import { analysisConfig, defineProps, isVisible, renderContent } from './utils';
 
 import type { FunctionComponent, ReactNode } from 'react';
 import type { Options } from '../types';
-import type { IConfig, RuntimeConfig } from './types';
+import type { IConfig } from './types';
 
 const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
   const { pfcs, data, middlewares = [], onFinished } = options;
@@ -14,8 +15,14 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
     ...(PComponent as any),
     ...pfcs,
   };
+
   // 初始化中间件
   const middleCore = new MiddlewareCore(middlewares);
+  context.setContext({
+    data,
+    configs,
+    middlewares: middleCore.middlewares,
+  });
   return (function () {
     const content = configs.map((_config, index) => {
       const { execute, base } = analysisConfig(_config);
@@ -40,11 +47,9 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         defineConfig.call(base, base);
       }
 
-      const runtime: RuntimeConfig = {
+      const runtime: IConfig = {
         ...base,
         ...execute,
-        __config: _config,
-        __data: data,
       };
 
       runtime.visible = isVisible(runtime);

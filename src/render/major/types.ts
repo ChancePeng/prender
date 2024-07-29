@@ -32,9 +32,4 @@ interface IConfig<T = never, P = any, K = never> extends FieldConfig<P, K> {
   defineConfig?: (config: FieldConfig) => void;
 }
 
-interface RuntimeConfig extends IConfig {
-  __data: any;
-  __config: IConfig;
-}
-
-export { ComponentType, FieldConfig, IConfig, RuntimeConfig, VisibleType };
+export { ComponentType, FieldConfig, IConfig, VisibleType };

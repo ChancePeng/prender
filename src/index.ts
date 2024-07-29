@@ -1,4 +1,5 @@
 export * from './components';
 
-export * from './render';
+export * from './hooks';
 
+export * from './render';

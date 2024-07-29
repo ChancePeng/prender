@@ -14,6 +14,6 @@ const defaultContext: IConfigProvierProps = {
 };
 
 const ConfigContext = createContext<IConfigProvierProps>(defaultContext);
-const { Provider, Consumer } = ConfigContext;
+const { Provider: ConfigProvicer, Consumer: ConfigConsumer } = ConfigContext;
 export default ConfigContext;
-export { Consumer, Provider };
+export { ConfigConsumer, ConfigProvicer };
