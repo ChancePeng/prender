@@ -10,10 +10,10 @@ export const isVisible = (config: IConfig, data?: any) => {
     return visible;
   }
   if (typeof visible === 'string') {
-    if (visible === 'hidden-while-empty-dataIndex') {
+    if (visible === 'HIDDEN_WHILE_DATAINDEX_IS_EMPTY') {
       return !isEmpty(dataIndex);
     }
-    if (visible === 'hidden-while-empty-dataSource') {
+    if (visible === 'HIDDEN_WHILE_DATASOURCE_IS_EMPTY') {
       return !isEmpty(dataSource);
     }
   }

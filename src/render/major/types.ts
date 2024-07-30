@@ -10,8 +10,8 @@ type ConfigColumnType<T = any> = TableColumnType<T> & DescriptionsColumnType<T>;
 
 type VisibleType =
   | boolean
-  | 'hidden-while-empty-dataSource'
-  | 'hidden-while-empty-dataIndex'
+  | 'HIDDEN_WHILE_DATAINDEX_IS_EMPTY'
+  | 'HIDDEN_WHILE_DATASOURCE_IS_EMPTY'
   | ((data?: any, record?: Record<string, any>) => boolean);
 
 interface FieldConfig<T = any, P = never> extends PFCProps<T, P> {
