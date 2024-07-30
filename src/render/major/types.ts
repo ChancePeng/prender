@@ -27,8 +27,18 @@ interface IConfig<T = never, P = any, K = never> extends FieldConfig<P, K> {
   readonly type: ComponentType | T;
   readonly instanceOf?: ComponentType | T;
   beforeDataRendered?: (data: any, record: any) => any;
-  renderEmpty?: (record: any, config?: FieldConfig) => ReactNode;
-  render?: (data: any, record: any, dom: ReactNode) => ReactNode;
+  renderEmpty?: (
+    data: any,
+    record: any,
+    dom: ReactNode,
+    config: IConfig,
+  ) => ReactNode;
+  render?: (
+    data: any,
+    record: any,
+    dom: ReactNode,
+    config: IConfig,
+  ) => ReactNode;
   defineConfig?: (config: FieldConfig) => void;
 }
 

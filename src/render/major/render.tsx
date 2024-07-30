@@ -30,7 +30,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       const { dataIndex } = base;
       const { beforeDataRendered, defineConfig } = execute;
 
-      // 存在dataIndex，从data中获取
+      // -----------------------开始获取dataSource------------------
       // 多值情况
       if (dataIndex instanceof Array) {
         base.dataSource = dataIndex.map((key) => get(data, key));
@@ -42,7 +42,9 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       if (beforeDataRendered) {
         base.dataSource = beforeDataRendered(base.dataSource, { ...data });
       }
+      //-----------------------结束-------------------------
 
+      // 重定义config
       if (defineConfig) {
         defineConfig.call(base, base);
       }
@@ -65,7 +67,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         render: renderComponent,
       } = runtime;
 
-      let Component: any = _pfcs?.[type];
+      const Component: any = _pfcs?.[type];
 
       if (!Component) {
         return <React.Fragment key={index} />;
@@ -77,25 +79,22 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         return <React.Fragment key={index} />;
       }
 
+      const childrenJsx = children?.length
+        ? renderInstance(configs, options)
+        : undefined;
+      const props = defineProps(runtime);
+      let jsx: ReactNode | undefined = Component ? (
+        <Component {...props}>{childrenJsx}</Component>
+      ) : undefined;
+
       // 展示当前组件当data为空的时候
       if (isEmpty(runtime.dataSource) && renderEmpty) {
-        Component = renderEmpty(data, base);
+        jsx = renderEmpty(runtime.dataSource, data, jsx, runtime);
       }
 
       if (renderComponent) {
-        Component = renderComponent(runtime.dataSource, data, Component);
+        jsx = renderComponent(runtime.dataSource, data, jsx, runtime);
       }
-
-      let childrenJsx = undefined;
-      if (children?.length) {
-        childrenJsx = renderInstance(children, options);
-      }
-
-      const props = defineProps(runtime);
-
-      const jsx = Component ? (
-        <Component {...props}>{childrenJsx}</Component>
-      ) : null;
 
       const Header = renderContent(header, runtime.dataSource, data);
       const Footer = renderContent(footer, runtime.dataSource, data);
