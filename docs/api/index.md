@@ -7,6 +7,10 @@ group:
   title: 快速开始
 ---
 
-# useRuntime
+# useContext
 
-<code src='./runtime.tsx'></code>
+<code src='./context.tsx'></code>
+
+# middleware 的配置
+
+<code src='./middleware.tsx'></code>
