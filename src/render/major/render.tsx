@@ -82,10 +82,10 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       const childrenJsx = children?.length
         ? renderInstance(children, options)
         : undefined;
+
       const props = defineProps(runtime);
-      let jsx: ReactNode | undefined = Component ? (
-        <Component {...props}>{childrenJsx}</Component>
-      ) : undefined;
+
+      let jsx: ReactNode = <Component {...props}>{childrenJsx}</Component>;
 
       // 展示当前组件当data为空的时候
       if (isEmpty(runtime.dataSource) && renderEmpty) {
