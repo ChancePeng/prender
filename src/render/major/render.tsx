@@ -80,7 +80,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       }
 
       const childrenJsx = children?.length
-        ? renderInstance(configs, options)
+        ? renderInstance(children, options)
         : undefined;
       const props = defineProps(runtime);
       let jsx: ReactNode | undefined = Component ? (
