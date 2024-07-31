@@ -37,9 +37,14 @@ const Table: PFC<TableProps> = (props) => {
     if (!record) {
       return columns?.map((column, index) => {
         return (
-          <td key={index} width={column?.width} className={`${prefixCls}-cell`}>
+          <th
+            key={index}
+            className={`${prefixCls}-cell`}
+            colSpan={column.colSpan}
+            rowSpan={column.rowSpan}
+          >
             {column?.title}
-          </td>
+          </th>
         );
       });
     }
@@ -55,15 +60,16 @@ const Table: PFC<TableProps> = (props) => {
         const inner = render ? render(data, record || {}, _index) : data;
         const content = emptyText ? inner ?? emptyText : inner;
         return (
-          <th
+          <td
             key={index}
             className={`${prefixCls}-cell`}
-            style={{ textAlign: align || 'left' }}
+            align={align}
+            width={column.width}
           >
             {content}
-          </th>
+          </td>
         );
-      }) || <th></th>
+      }) || <td></td>
     );
   };
 

@@ -51,11 +51,7 @@ const TableColumn: PFC<TableProps> = (props) => {
       const inner = render ? render(data, record, index) : data;
       const content = emptyText ? inner ?? emptyText : inner;
       return (
-        <td
-          key={i}
-          className={`${prefixCls}-cell`}
-          style={{ textAlign: align || 'left' }}
-        >
+        <td key={i} className={`${prefixCls}-cell`} align={align}>
           {content}
         </td>
       );
@@ -81,6 +77,9 @@ const TableColumn: PFC<TableProps> = (props) => {
           <th
             className={`${prefixCls}-cell`}
             style={{ textAlign: align || 'left' }}
+            rowSpan={column.rowSpan}
+            colSpan={column.colSpan}
+            align={column.align}
           >
             {title}
           </th>
