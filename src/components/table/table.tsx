@@ -55,15 +55,15 @@ const Table: PFC<TableProps> = (props) => {
         const inner = render ? render(data, record || {}, _index) : data;
         const content = emptyText ? inner ?? emptyText : inner;
         return (
-          <td
+          <th
             key={index}
             className={`${prefixCls}-cell`}
             style={{ textAlign: align || 'left' }}
           >
             {content}
-          </td>
+          </th>
         );
-      }) || <td></td>
+      }) || <th></th>
     );
   };
 
