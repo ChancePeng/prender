@@ -21,7 +21,7 @@ class MiddlewareCore {
     this.state = true;
     const arr = [...this.middlewares];
     while (arr.length && this.state) {
-      const middleware = arr.pop();
+      const middleware = arr.shift();
       this.state = false;
       middleware?.run.call(middleware, runtime, this.next);
     }
