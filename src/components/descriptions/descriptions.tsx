@@ -53,7 +53,7 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
   }, []);
 
   const renderCell = (column: DescriptionsColumnType<any>, index: number) => {
-    const { dataIndex, title, render, span = 1 } = column;
+    const { dataIndex, title, render, span = 1, align } = column;
     let data = null;
     if (dataIndex instanceof Array) {
       data = dataIndex.map((key) => get(dataSource, key));
@@ -65,7 +65,10 @@ const Descriptions: PFC<DescriptionsProps> = (props) => {
     if (bordered) {
       return (
         <React.Fragment key={index}>
-          <th className={`${prefixCls}-cell ${prefixCls}-cell-label`}>
+          <th
+            className={`${prefixCls}-cell ${prefixCls}-cell-label`}
+            align={align}
+          >
             {title}
           </th>
           <td
