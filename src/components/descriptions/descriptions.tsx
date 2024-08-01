@@ -7,7 +7,7 @@ import type { DescriptionsColumnType, DescriptionsProps } from './type';
 
 import './index.less';
 
-const Descriptions: PFC<DescriptionsProps> = (props) => {
+const Descriptions: PFC<DescriptionsProps, Record<string, any>> = (props) => {
   const {
     column = 3,
     dataSource,

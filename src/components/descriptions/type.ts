@@ -8,4 +8,5 @@ export interface DescriptionsProps<T = Record<string, any>> {
   column?: number;
   columns?: DescriptionsColumnType<T>[];
   columnEmptyText?: string | false;
+  dataSource?: Record<string, any>;
 }
