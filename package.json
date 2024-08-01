@@ -1,6 +1,6 @@
 {
   "name": "@change/prender",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A plugin to generate web page",
   "license": "MIT",
   "module": "lib/index.js",
