@@ -29,7 +29,7 @@ interface IConfig<C = never, D = any, E = never> extends FieldConfig<D, E> {
   beforeDataRendered?: (
     data: any,
     record: any,
-  ) => string | number | boolean | Record<symbol, any> | ReactNode;
+  ) => Record<symbol, any> | Record<symbol, any>[] | ReactNode;
   renderEmpty?: (
     data: any,
     record: any,
