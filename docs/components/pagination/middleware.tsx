@@ -31,9 +31,9 @@ const config = [
   {
     type: 'Headline',
     fieldProps: {
-      tag: 'h1',
+      tag: 'h2',
     },
-    dataSource: '这是一级标题',
+    dataSource: '这是二级标题',
   },
   {
     type: 'Table',

@@ -26,19 +26,19 @@ interface FieldConfig<D = any, E = never> extends PFCProps<D, E> {
 interface IConfig<C = never, D = any, E = never> extends FieldConfig<D, E> {
   readonly type: ComponentType | C;
   readonly instanceOf?: ComponentType | C;
-  beforeDataRendered?: (
+  beforeDataRendered?: <T = Record<symbol, any>>(
     data: any,
     record: any,
-  ) => Record<symbol, any> | Record<symbol, any>[] | ReactNode;
-  renderEmpty?: (
-    data: any,
-    record: any,
+  ) => T | Record<symbol, any>[] | string | number | boolean | symbol;
+  renderEmpty?: <T = any, P = any>(
+    data: T,
+    record: P,
     dom: ReactNode,
     config: IConfig,
   ) => ReactNode;
-  render?: (
-    data: any,
-    record: any,
+  render?: <T = any, P = any>(
+    data: T,
+    record: P,
     dom: ReactNode,
     config: IConfig,
   ) => ReactNode;

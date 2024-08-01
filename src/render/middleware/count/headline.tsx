@@ -62,7 +62,7 @@ class HeadlineCount implements MiddlewareImplements {
         const title = convertToChinaNum(this.count[0]);
         config.dataSource = (
           <>
-            <span>{title}</span>
+            <span>{title}、</span>
             <span>{dataSource}</span>
           </>
         );
@@ -70,7 +70,7 @@ class HeadlineCount implements MiddlewareImplements {
         const title = this.stringify(currIndex);
         config.dataSource = (
           <>
-            <span>{title}</span>
+            <span>{title} </span>
             <span>{dataSource}</span>
           </>
         );
