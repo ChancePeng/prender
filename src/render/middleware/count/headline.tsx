@@ -1,4 +1,5 @@
 import type { IConfig } from '@/render';
+import React from 'react';
 import type { MiddlewareImplements } from '../type';
 import { convertToChinaNum } from './utils';
 
@@ -59,10 +60,20 @@ class HeadlineCount implements MiddlewareImplements {
       });
       if (tag === 'h1' && this.language === 'chinese') {
         const title = convertToChinaNum(this.count[0]);
-        config.dataSource = `${title}、${dataSource ?? ''}`;
+        config.dataSource = (
+          <>
+            <span>{title}</span>
+            <span>{dataSource}</span>
+          </>
+        );
       } else {
         const title = this.stringify(currIndex);
-        config.dataSource = `${title} ${dataSource ?? ''}`;
+        config.dataSource = (
+          <>
+            <span>{title}</span>
+            <span>{dataSource}</span>
+          </>
+        );
       }
     }
     next();

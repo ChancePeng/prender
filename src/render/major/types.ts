@@ -14,7 +14,7 @@ type VisibleType =
   | 'HIDDEN_WHILE_DATASOURCE_IS_EMPTY'
   | ((data?: any, record?: Record<string, any>) => boolean);
 
-interface FieldConfig<T = any, P = never> extends PFCProps<T, P> {
+interface FieldConfig<D = any, E = never> extends PFCProps<D, E> {
   columns?: ConfigColumnType[];
   visible?: VisibleType;
   fieldProps?: Record<string | number | symbol, any>;
@@ -23,10 +23,13 @@ interface FieldConfig<T = any, P = never> extends PFCProps<T, P> {
   footer?: ((data?: any, record?: any) => ReactNode) | ReactNode | string[];
 }
 
-interface IConfig<T = never, P = any, K = never> extends FieldConfig<P, K> {
-  readonly type: ComponentType | T;
-  readonly instanceOf?: ComponentType | T;
-  beforeDataRendered?: (data: any, record: any) => any;
+interface IConfig<C = never, D = any, E = never> extends FieldConfig<D, E> {
+  readonly type: ComponentType | C;
+  readonly instanceOf?: ComponentType | C;
+  beforeDataRendered?: (
+    data: any,
+    record: any,
+  ) => string | number | boolean | Record<symbol, any> | ReactNode;
   renderEmpty?: (
     data: any,
     record: any,

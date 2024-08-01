@@ -6,14 +6,14 @@ import type {
   ReactNode,
 } from 'react';
 
-export interface PFCProps<T = any, P = never> {
+export interface PFCProps<D = any, E = never> {
   id?: string;
   className?: string;
   style?: CSSProperties;
   dataIndex?: string | string[];
-  dataSource?: T;
+  dataSource?: D;
   bordered?: boolean;
-  htmlAttributes?: HTMLAttributes<P>;
+  htmlAttributes?: HTMLAttributes<E>;
 }
 export interface ColumnType<T = any> {
   align?: 'left' | 'right' | 'center';
@@ -22,8 +22,8 @@ export interface ColumnType<T = any> {
   render?: (value?: any, record?: T, index?: number) => ReactNode;
 }
 
-type PFCPropsWithChildren<T, P> = PropsWithChildren<PFCProps<T, P>>;
+type PFCPropsWithChildren<D, E> = PropsWithChildren<PFCProps<D, E>>;
 
-export type PFC<T = unknown, P = Record<string, any>[], K = never> = FC<
-  T & PFCPropsWithChildren<P, K>
+export type PFC<P = unknown, D = Record<string, any>[], E = never> = FC<
+  P & PFCPropsWithChildren<D, E>
 >;

@@ -27,11 +27,16 @@ export const renderContent = (
   render?: ((data?: any, record?: any) => ReactNode) | ReactNode | string[],
   data?: any,
   record?: any,
+  boolean?: boolean,
 ) => {
+  let jsx = undefined;
   if (render instanceof Array) {
-    return <Mark dataSource={render} />;
+    jsx = <Mark dataSource={render} />;
+  } else {
+    jsx = render instanceof Function ? render(data, record) : render;
   }
-  return render instanceof Function ? render(data, record) : render;
+  const prefix = boolean ? 'header' : 'footer';
+  return <div className={`pfc-config-item-${prefix}`}>{jsx}</div>;
 };
 
 export const analysisConfig = (config: IConfig) => {

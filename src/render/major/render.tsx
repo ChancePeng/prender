@@ -96,7 +96,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         jsx = renderComponent(runtime.dataSource, data, jsx, runtime);
       }
 
-      const Header = renderContent(header, runtime.dataSource, data);
+      const Header = renderContent(header, runtime.dataSource, data, true);
       const Footer = renderContent(footer, runtime.dataSource, data);
 
       return (
