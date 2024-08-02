@@ -36,12 +36,16 @@ const Table: PFC<TableProps> = (props) => {
   const renderCell = (record?: Record<string, any>, _index?: number) => {
     if (!record) {
       return columns?.map((column, index) => {
+        const { colSpan = 1, rowSpan = 1 } = column;
+        if (colSpan === 0 || rowSpan === 0) {
+          return <></>;
+        }
         return (
           <th
             key={index}
             className={`${prefixCls}-cell`}
-            colSpan={column.colSpan}
-            rowSpan={column.rowSpan}
+            colSpan={colSpan}
+            rowSpan={rowSpan}
           >
             {column?.title}
           </th>
@@ -59,12 +63,23 @@ const Table: PFC<TableProps> = (props) => {
         }
         const inner = render ? render(data, record || {}, _index) : data;
         const content = emptyText ? inner ?? emptyText : inner;
+        const { colSpan = 1, rowSpan = 1 } =
+          props.span?.({
+            index,
+            record,
+            data,
+          }) || {};
+        if (colSpan === 0 || rowSpan === 0) {
+          return <></>;
+        }
         return (
           <td
             key={index}
             className={`${prefixCls}-cell`}
             align={align}
             width={column.width}
+            colSpan={colSpan}
+            rowSpan={rowSpan}
           >
             {content}
           </td>

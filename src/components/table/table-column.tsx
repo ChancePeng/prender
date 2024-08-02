@@ -50,8 +50,19 @@ const TableColumn: PFC<TableProps> = (props) => {
       }
       const inner = render ? render(data, record, index) : data;
       const content = emptyText ? inner ?? emptyText : inner;
+
+      const { rowSpan = 1, colSpan = 1 } = column;
+      if (colSpan === 0 || rowSpan === 0) {
+        return <></>;
+      }
       return (
-        <td key={i} className={`${prefixCls}-cell`} align={align}>
+        <td
+          key={i}
+          className={`${prefixCls}-cell`}
+          align={align}
+          rowSpan={rowSpan}
+          colSpan={colSpan}
+        >
           {content}
         </td>
       );
@@ -72,13 +83,25 @@ const TableColumn: PFC<TableProps> = (props) => {
       } else {
         cells = dataSource?.length ? renderCell(column, index) : null;
       }
+
+      const { rowSpan = 1, colSpan = 1 } =
+        props.span?.({
+          index,
+          record: {},
+          data: null,
+        }) || {};
+
+      if (colSpan === 0 || rowSpan === 0) {
+        return <></>;
+      }
+
       return (
         <tr className={`${prefixCls}-row`} key={index}>
           <th
             className={`${prefixCls}-cell`}
             style={{ textAlign: align || 'left' }}
-            rowSpan={column.rowSpan}
-            colSpan={column.colSpan}
+            rowSpan={rowSpan}
+            colSpan={colSpan}
             align={column.align}
           >
             {title}

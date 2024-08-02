@@ -18,6 +18,10 @@ group:
 
 <code src='./border.tsx'></code>
 
+### 合并
+
+<code src='./table-span.tsx'></code>
+
 ## 纵向表格
 
 <code src='./column.tsx'></code>
