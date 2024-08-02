@@ -22,11 +22,21 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
     data,
     configs,
     middlewares: middleCore.middlewares,
+    config: null,
   });
   return (function () {
-    const content = configs.map((_config, index) => {
+    const content = configs.map((config, index) => {
+      const _config = new Proxy(config, {
+        get(target, key) {
+          return Reflect.get(target, key);
+        },
+        set() {
+          console.error('[prender]: config is readonly');
+          return true;
+        },
+      });
+      context.setConfig(_config);
       const { execute, base } = analysisConfig(_config);
-
       const { dataIndex } = base;
       const { beforeDataRendered, defineConfig } = execute;
 
@@ -40,7 +50,11 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       }
       // data的中间处理函数
       if (beforeDataRendered) {
-        base.dataSource = beforeDataRendered(base.dataSource, { ...data });
+        base.dataSource = beforeDataRendered(
+          base.dataSource,
+          { ...data },
+          _config,
+        );
       }
       //-----------------------结束-------------------------
 
@@ -110,6 +124,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
     onFinished?.({
       middlewares: middleCore.middlewares,
     });
+    context.setConfig(null);
     return content;
   })();
 };

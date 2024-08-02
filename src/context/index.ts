@@ -1,3 +1,4 @@
+import { IConfig } from 'prender/render';
 import type { IRuntimeContext } from './types';
 
 class RuntimeContext {
@@ -7,6 +8,7 @@ class RuntimeContext {
       data: null,
       configs: [],
       middlewares: [],
+      config: null,
     };
   }
   setContext(context: IRuntimeContext) {
@@ -20,6 +22,12 @@ class RuntimeContext {
       return this.context[key];
     }
     return this.context;
+  }
+  setConfig(config: IConfig | null) {
+    this.context.config = config;
+  }
+  getConfig() {
+    return this.context.config;
   }
 }
 

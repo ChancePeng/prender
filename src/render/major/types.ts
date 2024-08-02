@@ -29,6 +29,7 @@ interface IConfig<C = never, D = any, E = never> extends FieldConfig<D, E> {
   beforeDataRendered?: <T = Record<symbol, any>>(
     data: any,
     record: any,
+    config: IConfig,
   ) => T | Record<symbol, any>[] | string | number | boolean | symbol;
   renderEmpty?: <T = any, P = any>(
     data: T,
