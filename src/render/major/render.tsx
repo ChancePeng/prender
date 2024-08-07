@@ -79,6 +79,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         footer,
         renderEmpty,
         render: renderComponent,
+        rootHtmlAttribute,
       } = runtime;
 
       const Component: any = _pfcs?.[type];
@@ -112,9 +113,14 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
 
       const Header = renderContent(header, runtime.dataSource, data, true);
       const Footer = renderContent(footer, runtime.dataSource, data);
-
+      const { className, style, ...fields } = rootHtmlAttribute || {};
       return (
-        <div className="pfc-config-item" key={index}>
+        <div
+          className={`pfc-config-item ${className ?? ''}`}
+          key={index}
+          style={style}
+          {...fields}
+        >
           {Header}
           {jsx}
           {Footer}

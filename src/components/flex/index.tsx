@@ -16,7 +16,7 @@ const Flex: PFC = (props) => {
     className,
   );
   return (
-    <div {...htmlAttributes} className={classes} style={style} id={id}>
+    <div className={classes} style={style} id={id} {...htmlAttributes}>
       {children}
     </div>
   );

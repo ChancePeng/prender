@@ -112,7 +112,7 @@ const Table: PFC<TableProps> = (props) => {
   };
 
   return (
-    <div {...htmlAttributes} id={id} className={classes} style={style}>
+    <div id={id} className={classes} style={style} {...htmlAttributes}>
       <table>
         <thead className={`${prefixCls}-thead`}>
           <tr className={`${prefixCls}-row`}>{renderCell()}</tr>

@@ -3,7 +3,7 @@ import type {
   PFCProps,
   TableColumnType,
 } from '@/components';
-import type { ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import type { ComponentType } from './render';
 
 type ConfigColumnType<T = any> = TableColumnType<T> & DescriptionsColumnType<T>;
@@ -21,6 +21,7 @@ interface FieldConfig<D = any, E = never> extends PFCProps<D, E> {
   children?: IConfig[];
   header?: ((data?: any, record?: any) => ReactNode) | ReactNode;
   footer?: ((data?: any, record?: any) => ReactNode) | ReactNode | string[];
+  rootHtmlAttribute?: HTMLAttributes<HTMLDivElement>;
 }
 
 interface IConfig<C = never, D = any, E = never> extends FieldConfig<D, E> {

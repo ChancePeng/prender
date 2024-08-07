@@ -113,7 +113,7 @@ const TableColumn: PFC<TableProps> = (props) => {
   };
 
   return (
-    <div {...htmlAttributes} id={id} className={classes} style={style}>
+    <div id={id} className={classes} style={style} {...htmlAttributes}>
       <table className={`${prefixCls}-table`}>
         <tbody>{renderRow()}</tbody>
       </table>

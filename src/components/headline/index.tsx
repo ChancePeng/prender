@@ -16,7 +16,7 @@ const Headline: PFC<HeadlineProps, string> = (props) => {
   const classes = classnames(prefixCls, `${prefixCls}-${tag}`, className);
   return React.createElement(
     tag,
-    { ...htmlAttributes, className: classes, id, style },
+    { className: classes, id, style, ...htmlAttributes },
     dataSource,
   );
 };

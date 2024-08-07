@@ -29,6 +29,9 @@ export const renderContent = (
   record?: any,
   boolean?: boolean,
 ) => {
+  if (!render) {
+    return undefined;
+  }
   let jsx = undefined;
   if (render instanceof Array) {
     jsx = <Mark dataSource={render} />;
@@ -73,6 +76,7 @@ export const defineProps = (runtime: IConfig) => {
     bordered,
     htmlAttributes,
     visible,
+    id,
   } = runtime;
 
   const base: any = {
@@ -87,6 +91,7 @@ export const defineProps = (runtime: IConfig) => {
     className,
     style,
     htmlAttributes,
+    id,
   };
   Object.keys(props).forEach((key) => {
     if (props[key] === null || props[key] === undefined) {

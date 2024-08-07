@@ -20,6 +20,7 @@ const config = [
       tag: 'h1',
     },
     dataSource: '这是一级标题',
+    id: 'aaa',
   },
   {
     type: 'Table',

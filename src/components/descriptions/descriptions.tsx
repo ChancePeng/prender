@@ -91,7 +91,7 @@ const Descriptions: PFC<DescriptionsProps, Record<string, any>> = (props) => {
   };
 
   return (
-    <div {...htmlAttributes} id={id} className={classes} style={style}>
+    <div id={id} className={classes} style={style} {...htmlAttributes}>
       <table className={`${prefixCls}-table`}>
         <tbody>
           {rows?.map((cells, index) => {
