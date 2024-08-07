@@ -8,4 +8,11 @@ export default defineConfig({
     },
     sourcemap: true,
   },
+  esm: {
+    output: 'es',
+    alias: {
+      '@/*': './src/*',
+    },
+    sourcemap: true,
+  },
 });
