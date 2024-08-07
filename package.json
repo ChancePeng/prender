@@ -1,11 +1,20 @@
 {
   "name": "@change/prender",
   "version": "1.0.0",
-  "description": "A plugin to generate web page",
+  "description": "一个配置化生成网页的库",
   "license": "MIT",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./lib/index.js"
+    }
+  },
+  "main": "lib/index.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
   "files": [
+    "es",
     "lib"
   ],
   "scripts": {

@@ -1,17 +1,11 @@
-# hzpdf
+# prender
 
-[![NPM version](https://img.shields.io/npm/v/hzpdf.svg?style=flat)](https://npmjs.org/package/hzpdf)
-[![NPM downloads](http://img.shields.io/npm/dm/hzpdf.svg?style=flat)](https://npmjs.org/package/hzpdf)
+一个配置化生成网页的库
 
-A react library developed with dumi
+# changed
 
-## Usage
-
-TODO
-
-## Options
-
-TODO
+原来的 0.0.1 版本已经迁移到当前 1.0.0 版本
+如项目中存在 0.0.1 版本可切换到当前版本(与原来的 0.0.1 无异)
 
 ## Development
 
