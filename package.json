@@ -14,7 +14,8 @@
   "module": "./es/index.js",
   "types": "./es/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "es"
   ],
   "scripts": {
     "build": "father build",
