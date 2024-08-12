@@ -1,17 +1,6 @@
-# hzpdf
+# prender
 
-[![NPM version](https://img.shields.io/npm/v/hzpdf.svg?style=flat)](https://npmjs.org/package/hzpdf)
-[![NPM downloads](http://img.shields.io/npm/dm/hzpdf.svg?style=flat)](https://npmjs.org/package/hzpdf)
-
-A react library developed with dumi
-
-## Usage
-
-TODO
-
-## Options
-
-TODO
+一个配置化生成网页的库
 
 ## Development
 
