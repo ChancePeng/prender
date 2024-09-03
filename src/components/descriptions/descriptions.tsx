@@ -36,12 +36,26 @@ const Descriptions: PFC<DescriptionsProps, Record<string, any>> = (props) => {
     const result: DescriptionsColumnType<any>[][] = [];
     columns?.forEach((item) => {
       const { span = 1 } = item;
-      sum = sum + span;
+      // 如果span大于column
+      console.log(span,column)
+      if (span > column) {
+        sum = sum + column;
+        item.span = column;
+      } else {
+        sum = sum + span;
+      }
+      console.log('如果塞入当前行，则当前行统计信息',sum)
+      // 如果当前行溢出
       if (sum > column) {
-        sum = 1;
+        console.log('溢出')
+        // 统计归1
+        sum = item.span || 1;
+        // 行数+1
         index += 1;
         result[index] = [item];
       } else {
+        console.log('没有溢出')
+        // 没有溢出，则增加
         if (result[index]) {
           result[index].push(item);
         } else {
@@ -50,8 +64,9 @@ const Descriptions: PFC<DescriptionsProps, Record<string, any>> = (props) => {
       }
     });
     return result;
-  }, []);
+  }, [columns, column]);
 
+  console.log(rows)
   const renderCell = (column: DescriptionsColumnType<any>, index: number) => {
     const { dataIndex, title, render, span = 1, align } = column;
     let data = null;
@@ -62,6 +77,7 @@ const Descriptions: PFC<DescriptionsProps, Record<string, any>> = (props) => {
     }
     const inner = render ? render(data, dataSource, index) : data;
     const content = emptyText ? inner ?? emptyText : inner;
+    const colSpan = span * 2 - 1;
     if (bordered) {
       return (
         <React.Fragment key={index}>
@@ -73,7 +89,7 @@ const Descriptions: PFC<DescriptionsProps, Record<string, any>> = (props) => {
           </th>
           <td
             className={`${prefixCls}-cell ${prefixCls}-cell-content`}
-            colSpan={span}
+            colSpan={colSpan}
           >
             {content}
           </td>

@@ -15,3 +15,7 @@ group:
 ## 带边框
 
 <code src='./border.tsx'></code>
+
+## 合并
+
+<code src='./merge.tsx'></code>
