@@ -10,7 +10,8 @@ import type { Options } from '../types';
 import type { IConfig } from './types';
 
 const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
-  const { pfcs, data, middlewares = [], onFinished } = options;
+  const { pfcs, data, middlewares = [] } = options;
+  const { onFinished, ...otherOptions } = options;
   const _pfcs: Record<string, FunctionComponent> = {
     ...(PComponent as any),
     ...pfcs,
@@ -23,6 +24,8 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
     configs,
     middlewares: middleCore.middlewares,
     config: null,
+    pfcs: _pfcs,
+    options: otherOptions,
   });
   return (function () {
     const content = configs.map((config, index) => {
@@ -95,7 +98,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
       }
 
       const childrenJsx = children?.length
-        ? renderInstance(children, options)
+        ? renderInstance(children, otherOptions)
         : undefined;
 
       const props = defineProps(runtime);

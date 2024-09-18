@@ -1,6 +1,5 @@
 import { IConfig } from 'prender/render';
 import type { IRuntimeContext } from './types';
-
 class RuntimeContext {
   context: IRuntimeContext;
   constructor() {
@@ -9,6 +8,8 @@ class RuntimeContext {
       configs: [],
       middlewares: [],
       config: null,
+      pfcs: {},
+      options: {},
     };
   }
   setContext(context: IRuntimeContext) {

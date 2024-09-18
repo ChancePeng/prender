@@ -14,17 +14,17 @@ type VisibleType =
   | 'HIDDEN_WHILE_DATASOURCE_IS_EMPTY'
   | ((data?: any, record?: Record<string, any>) => boolean);
 
-interface FieldConfig<D = any, E = never> extends PFCProps<D, E> {
+interface FieldConfig<C = never, D = any, E = never> extends PFCProps<D, E> {
   columns?: ConfigColumnType[];
   visible?: VisibleType;
   fieldProps?: Record<string | number | symbol, any>;
-  children?: IConfig[];
+  children?: IConfig<C, D, E>[];
   header?: ((data?: any, record?: any) => ReactNode) | ReactNode;
   footer?: ((data?: any, record?: any) => ReactNode) | ReactNode | string[];
   rootHtmlAttribute?: HTMLAttributes<HTMLDivElement>;
 }
 
-interface IConfig<C = never, D = any, E = never> extends FieldConfig<D, E> {
+interface IConfig<C = never, D = any, E = never> extends FieldConfig<C, D, E> {
   readonly type: ComponentType | C;
   readonly instanceOf?: ComponentType | C;
   beforeDataRendered?: <T = Record<symbol, any>>(
