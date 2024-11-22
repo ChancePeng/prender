@@ -6,14 +6,20 @@ import { convertToChinaNum } from './utils';
 interface Option {
   level?: number;
   language?: 'chinese' | 'arba';
+  initial?: number[];
 }
 
 class HeadlineCount implements MiddlewareImplements {
   private count: number[];
   private language: 'chinese' | 'arba';
   constructor(option: Option) {
-    const { level = 3, language = 'chinese' } = option || {};
+    const { level = 3, language = 'chinese', initial } = option || {};
     this.count = new Array(level).fill(0);
+    if (initial?.length) {
+      for (let i = 0; i < level; i++) {
+        this.count[i] = initial[i] ?? 0;
+      }
+    }
     this.language = language;
   }
   private stringify = (endIndex: number) => {

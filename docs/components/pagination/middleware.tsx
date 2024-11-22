@@ -76,7 +76,14 @@ export default () => (
     <Pagination
       config={config}
       water="hello"
-      middlewares={[CountMiddleware.Headline]}
+      middlewares={[
+        {
+          use: CountMiddleware.Headline,
+          option: {
+            initial: [4, 0, 0],
+          },
+        },
+      ]}
     />
   </ConfigContext.Provider>
 );

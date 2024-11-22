@@ -71,7 +71,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         ...execute,
       };
 
-      runtime.visible = isVisible(runtime);
+      runtime.visible = isVisible(runtime, data);
       // 执行所有中间件
       middleCore.execute(runtime);
 
@@ -91,7 +91,7 @@ const renderInstance = (configs: IConfig[], options: Options): ReactNode[] => {
         return <React.Fragment key={index} />;
       }
 
-      const show = isVisible(runtime);
+      const show = isVisible(runtime, data);
 
       if (!show) {
         return <React.Fragment key={index} />;

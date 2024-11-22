@@ -51,7 +51,12 @@ const TableColumn: PFC<TableProps> = (props) => {
       const inner = render ? render(data, record, index) : data;
       const content = emptyText ? inner ?? emptyText : inner;
 
-      const { rowSpan = 1, colSpan = 1 } = column;
+      const { rowSpan = 1, colSpan = 1 } =
+        props?.span?.({
+          index,
+          record,
+          data,
+        }) || {};
       if (colSpan === 0 || rowSpan === 0) {
         return <></>;
       }
@@ -71,7 +76,13 @@ const TableColumn: PFC<TableProps> = (props) => {
 
   const renderRow = () => {
     return columns?.map((column, index) => {
-      const { title, align } = column;
+      const {
+        title,
+        align,
+        colSpan: thColSpan = 1,
+        rowSpan: thRowSpan = 1,
+      } = column;
+
       let cells = null;
       if (index === 0 && !dataSource?.length) {
         const emptyJsx = renderEmpty ? renderEmpty() : 'no data';
@@ -84,28 +95,24 @@ const TableColumn: PFC<TableProps> = (props) => {
         cells = dataSource?.length ? renderCell(column, index) : null;
       }
 
-      const { rowSpan = 1, colSpan = 1 } =
-        props.span?.({
-          index,
-          record: {},
-          data: null,
-        }) || {};
-
-      if (colSpan === 0 || rowSpan === 0) {
-        return <></>;
-      }
-
-      return (
-        <tr className={`${prefixCls}-row`} key={index}>
+      const thElement =
+        thRowSpan && thColSpan ? (
           <th
             className={`${prefixCls}-cell`}
             style={{ textAlign: align || 'left' }}
-            rowSpan={rowSpan}
-            colSpan={colSpan}
+            rowSpan={thRowSpan}
+            colSpan={thColSpan}
             align={column.align}
           >
             {title}
           </th>
+        ) : (
+          <></>
+        );
+
+      return (
+        <tr className={`${prefixCls}-row`} key={index}>
+          {thElement}
           {cells}
         </tr>
       );
