@@ -17,13 +17,3 @@ $ npm install @change/prender
 
 $ yarn add @change/prender
 ```
-
-## 使用
-
-### 使用组件
-
-```text
-import { Mark } from '@change/prender';
-
-export default () => <Mark dataSource="这是一段描述" />
-```

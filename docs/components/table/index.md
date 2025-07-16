@@ -2,6 +2,9 @@
 title: 表格（Table)
 group:
   title: 通用
+nav:
+  title: 组件
+  order: 2
 ---
 
 ## Table 表格
